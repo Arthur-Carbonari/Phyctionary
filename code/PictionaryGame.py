@@ -138,17 +138,8 @@ class PictionaryGame(QMainWindow):
     def change_brush_size(self, px_size):
         self.brushSize = px_size
 
-    def black(self):  # the brush color is set to black
-        self.brushColor = Qt.GlobalColor.black
-
-    def red(self):
-        self.brushColor = Qt.GlobalColor.red
-
-    def green(self):
-        self.brushColor = Qt.GlobalColor.green
-
-    def yellow(self):
-        self.brushColor = Qt.GlobalColor.yellow
+    def change_brush_color(self, color):
+        self.brushColor = Qt.GlobalColor[color]
 
     # Get a random word from the list read from file
     def get_word(self):

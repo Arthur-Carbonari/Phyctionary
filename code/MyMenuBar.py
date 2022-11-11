@@ -51,19 +51,19 @@ class MyMenuBar(QMenuBar):
         black_action = QAction(QIcon("./icons/black.png"), "Black", parent)
         black_action.setShortcut("Ctrl+B")
         brush_color_menu.addAction(black_action)
-        black_action.triggered.connect(parent.black)
+        black_action.triggered.connect(lambda: parent.change_brush_color("black"))
 
         red_action = QAction(QIcon("./icons/red.png"), "Red", parent)
         red_action.setShortcut("Ctrl+R")
         brush_color_menu.addAction(red_action)
-        red_action.triggered.connect(parent.red)
+        red_action.triggered.connect(lambda: parent.change_brush_color("red"))
 
         green_action = QAction(QIcon("./icons/green.png"), "Green", parent)
         green_action.setShortcut("Ctrl+G")
         brush_color_menu.addAction(green_action)
-        green_action.triggered.connect(parent.green)
+        green_action.triggered.connect(lambda: parent.change_brush_color("green"))
 
         yellow_action = QAction(QIcon("./icons/yellow.png"), "Yellow", parent)
         yellow_action.setShortcut("Ctrl+Y")
         brush_color_menu.addAction(yellow_action)
-        yellow_action.triggered.connect(parent.yellow)
+        yellow_action.triggered.connect(lambda: parent.change_brush_color("yellow"))
