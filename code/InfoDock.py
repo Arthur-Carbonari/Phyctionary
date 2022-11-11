@@ -7,6 +7,8 @@ class InfoDock(QDockWidget):
     def __init__(self, parent):
         super().__init__()
 
+        self.parent = parent
+
         self.current = QLabel("-")
 
         self.p1 = QLabel("-")
@@ -15,11 +17,14 @@ class InfoDock(QDockWidget):
         self.score_p1 = QLabel("-")
         self.score_p2 = QLabel("-")
 
+        self._init_ui()
+
+    def _init_ui(self):
         # Widget inside the Dock
         info_widget = QWidget()
         info_layout = QVBoxLayout()
         info_widget.setLayout(info_layout)
-        info_widget.setMaximumSize(100, parent.height())
+        info_widget.setMaximumSize(100, self.parent.height())
 
         # Add controls to custom widget
         form_layout = QFormLayout()
