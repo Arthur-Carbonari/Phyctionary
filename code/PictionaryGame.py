@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QDo
     QLabel
 
 from MyMenuBar import MyMenuBar
+from InfoDock import InfoDock
 
 
 class PictionaryGame(QMainWindow):
@@ -54,32 +55,12 @@ class PictionaryGame(QMainWindow):
         menu_bar = MyMenuBar(self)
         self.setMenuBar(menu_bar)
 
-        # Side Dock
-        self.dock_info = QDockWidget()
-        self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, self.dock_info)
+        # Side Docks
 
-        # Widget inside the Dock
-        player_info = QWidget()
-        self.vb_dock = QVBoxLayout()
-        player_info.setLayout(self.vb_dock)
-        player_info.setMaximumSize(100, self.height())
-        # Add controls to custom widget
-        self.vb_dock.addWidget(QLabel("Current Turn: -"))
-        self.vb_dock.addSpacing(20)
-        self.vb_dock.addWidget(QLabel("Scores:"))
-        self.vb_dock.addWidget(QLabel("Player 1: -"))
-        self.vb_dock.addWidget(QLabel("Player 2: -"))
-        self.vb_dock.addStretch(1)
-        self.vb_dock.addWidget(QPushButton("Button"))
+        # Info Dock
+        info_dock = InfoDock(self)
+        self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, info_dock)
 
-        # Setting colour of dock to gray
-        player_info.setAutoFillBackground(True)
-        p = player_info.palette()
-        p.setColor(player_info.backgroundRole(), Qt.GlobalColor.gray)
-        player_info.setPalette(p)
-
-        # Set widget for dock
-        self.dock_info.setWidget(player_info)
         self.word_list = []
         self.get_list("easy")
         self.currentWord = self.get_word()
