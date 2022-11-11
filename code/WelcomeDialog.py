@@ -50,9 +50,25 @@ class WelcomeDialog(QDialog):
         layout.addLayout(button_box)
         self.setLayout(layout)
 
-    def set_choice(self, choice):
-        self.parent.get_list(choice)
-        self.selected = True
+    def start_game(self):
+        player_one = self.player_one.text()
+        player_two = self.player_two.text()
+
+        if not (player_one | player_two):
+            return
+
+        if self.easy.isChecked():
+            game_mode = self.easy.text()
+        elif self.hard.isChecked():
+            game_mode = self.hard.text()
+        else:
+            return
+
+        self.parent.set_players(player_one, player_two)
+        self.parent.get_list(game_mode)
+
+        self.game_ready = True
+
         self.close()
 
     def closeEvent(self, e):
