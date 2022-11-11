@@ -9,7 +9,7 @@ class WelcomeDialog(QDialog):
         self.parent = parent
         self.selected = False
 
-        self.setWindowTitle("Dialog")
+        self.setWindowTitle("Phyctionary")
         self.setModal(True)
 
         layout = QVBoxLayout()

@@ -26,7 +26,7 @@ class PictionaryGame(QMainWindow):
         super().__init__()
 
         # set window title
-        self.setWindowTitle("Pictionary Game - A2 Template")
+        self.setWindowTitle("Phyctionary")
 
         # set the windows dimensions
         top = 400
