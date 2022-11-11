@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QDockWidget, QWidget, QVBoxLayout, QLabel, QPushButton
+from PyQt6.QtWidgets import QDockWidget, QWidget, QVBoxLayout, QLabel, QPushButton, QFormLayout
 
 
 class InfoDock(QDockWidget):
@@ -7,19 +7,32 @@ class InfoDock(QDockWidget):
     def __init__(self, parent):
         super().__init__()
 
+        self.current = QLabel("-")
+
+        self.p1 = QLabel("-")
+        self.p2 = QLabel("-")
+
+        self.score_p1 = QLabel("-")
+        self.score_p2 = QLabel("-")
+
         # Widget inside the Dock
         info_widget = QWidget()
         info_layout = QVBoxLayout()
         info_widget.setLayout(info_layout)
         info_widget.setMaximumSize(100, parent.height())
+
         # Add controls to custom widget
-        info_layout.addWidget(QLabel("Current Turn: -"))
-        info_layout.addSpacing(20)
-        info_layout.addWidget(QLabel("Scores:"))
-        info_layout.addWidget(QLabel("Player 1: -"))
-        info_layout.addWidget(QLabel("Player 2: -"))
+        form_layout = QFormLayout()
+        form_layout.addRow(QLabel("Current Turn: -"), self.current)
+        form_layout.spacerItem()
+        form_layout.addRow(QLabel("Player 1: -"), self.p1)
+        form_layout.addRow(QLabel("Score: -"), self.score_p1)
+        form_layout.addRow(QLabel("Player 2: -"), self.p2)
+        form_layout.addRow(QLabel("Score: -"), self.score_p2)
+        info_layout.addLayout(form_layout)
+
         info_layout.addStretch(1)
-        info_layout.addWidget(QPushButton("Button"))
+        info_layout.addWidget(QPushButton("Skip Turn"))
 
         # Setting colour of dock to gray
         info_widget.setAutoFillBackground(True)
