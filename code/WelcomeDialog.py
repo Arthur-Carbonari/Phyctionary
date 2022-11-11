@@ -56,3 +56,8 @@ class WelcomeDialog(QDialog):
     def closeEvent(self, e):
         if not self.selected:
             exit()
+
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key.Key_Escape:
+            return
+
