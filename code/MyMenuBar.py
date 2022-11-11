@@ -1,35 +1,34 @@
 from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtWidgets import QMenuBar
+
+from PictionaryGame import PictionaryGame
 
 
-class MyMenuBar:
+class MyMenuBar(QMenuBar):
 
-    def __init__(self, parent):
-        # Set up menus
-        main_menu = parent.menuBar()  # Create a menu bar
-        main_menu.setNativeMenuBar(False)
-        file_menu = main_menu.addMenu(" File")  # Add file menu to the menu bar, "File" is reserved in Mac
-        brush_size_menu = main_menu.addMenu(" Brush Size")  # add the "Brush Size" menu to the menu bar
-        brush_color_menu = main_menu.addMenu(" Brush Colour")  # add the "Brush Colour" menu to the menu bar
+    def __init__(self, parent: PictionaryGame):
+        super().__init__()
 
-        # Save menu item
-        # create a save action with a png as an icon, docs: https://doc.qt.io/qt-6/qaction.html
-        save_action = QAction(QIcon("./icons/save.png"), "Save", parent)
-        # connect this save action to a keyboard shortcut, docs: https://doc.qt.io/qt-6/qaction.html#shortcut-prop
-        save_action.setShortcut("Ctrl+S")
-        # add the save action to the file menu, documentation: https://doc.qt.io/qt-6/qwidget.html#addAction
-        file_menu.addAction(save_action)
-        # when the menu option or shortcut is used the save slot is triggered
-        # docs: https://doc.qt.io/qt-6/qaction.html#triggered
-        save_action.triggered.connect(parent.save)
+        self.setNativeMenuBar(False)
 
-        # clear
-        clear_action = QAction(QIcon("./icons/clear.png"), "Clear", parent)  # create a clear action with icon
-        clear_action.setShortcut("Ctrl+C")  # connect this clear action to a keyboard shortcut
-        file_menu.addAction(clear_action)  # add this action to the file menu
-        # when the menu option is selected or the shortcut is used the clear slot is triggered
-        clear_action.triggered.connect(parent.clear)
+        # Add menus to menu bar
+        file_menu = self.addMenu(" File")  # Add file menu to the menu bar, "File" is reserved in Mac
+        brush_size_menu = self.addMenu(" Brush Size")  # Add the "Brush Size" menu to the menu bar
+        brush_color_menu = self.addMenu(" Brush Colour")  # Add the "Brush Colour" menu to the menu bar
 
-        # brush thickness
+        # Save Action
+        save_action = QAction(QIcon("./icons/save.png"), "Save", parent)  # Create a save action with an icon
+        save_action.setShortcut("Ctrl+S")  # Connect this save action to a keyboard shortcut
+        file_menu.addAction(save_action)  # Add the save action to the file menu
+        save_action.triggered.connect(parent.save)  # Connect action to respective slot
+
+        # Clear Action
+        clear_action = QAction(QIcon("./icons/clear.png"), "Clear", parent)  # Create a clear action with icon
+        clear_action.setShortcut("Ctrl+C")  # Connect this clear action to a keyboard shortcut
+        file_menu.addAction(clear_action)  # Add this action to the file menu
+        clear_action.triggered.connect(parent.clear)  # Connect action to respective slot
+
+        # Change Brush Thickness
         three_px_action = QAction(QIcon("./icons/three_px.png"), "3px", parent)
         three_px_action.setShortcut("Ctrl+3")
         brush_size_menu.addAction(three_px_action)  # connect the action to the function below
@@ -50,7 +49,7 @@ class MyMenuBar:
         brush_size_menu.addAction(nine_px_action)
         nine_px_action.triggered.connect(parent.nine_px)
 
-        # brush colors
+        # Change Brush Colors
         black_action = QAction(QIcon("./icons/black.png"), "Black", parent)
         black_action.setShortcut("Ctrl+B")
         brush_color_menu.addAction(black_action)

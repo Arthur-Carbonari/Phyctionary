@@ -50,7 +50,9 @@ class PictionaryGame(QMainWindow):
         # Reference to last point recorded by mouse
         self.lastPoint = QPoint()  # documentation: https://doc.qt.io/qt-6/qpoint.html
 
-        MyMenuBar(self)
+        # Create and set the Menu Bar
+        menu_bar = MyMenuBar(self)
+        self.setMenuBar(menu_bar)
 
         # Side Dock
         self.dock_info = QDockWidget()
