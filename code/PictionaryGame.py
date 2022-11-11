@@ -135,17 +135,8 @@ class PictionaryGame(QMainWindow):
         self.image.fill(Qt.GlobalColor.white)  # fill the image with white
         self.update()  # call the update method of the widget which calls the paintEvent of this class
 
-    def three_px(self):  # the brush size is set to 3
-        self.brushSize = 3
-
-    def five_px(self):
-        self.brushSize = 5
-
-    def seven_px(self):
-        self.brushSize = 7
-
-    def nine_px(self):
-        self.brushSize = 9
+    def change_brush_size(self, px_size):
+        self.brushSize = px_size
 
     def black(self):  # the brush color is set to black
         self.brushColor = Qt.GlobalColor.black

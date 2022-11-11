@@ -1,12 +1,10 @@
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QMenuBar
 
-from PictionaryGame import PictionaryGame
-
 
 class MyMenuBar(QMenuBar):
 
-    def __init__(self, parent: PictionaryGame):
+    def __init__(self, parent):
         super().__init__()
 
         self.setNativeMenuBar(False)
@@ -32,22 +30,22 @@ class MyMenuBar(QMenuBar):
         three_px_action = QAction(QIcon("./icons/three_px.png"), "3px", parent)
         three_px_action.setShortcut("Ctrl+3")
         brush_size_menu.addAction(three_px_action)  # connect the action to the function below
-        three_px_action.triggered.connect(parent.three_px)
+        three_px_action.triggered.connect(lambda: parent.change_brush_size(3))
 
         five_px_action = QAction(QIcon("./icons/five_px.png"), "5px", parent)
         five_px_action.setShortcut("Ctrl+5")
         brush_size_menu.addAction(five_px_action)
-        five_px_action.triggered.connect(parent.five_px)
+        five_px_action.triggered.connect(lambda: parent.change_brush_size(5))
 
         seven_px_action = QAction(QIcon("./icons/seven_px.png"), "7px", parent)
         seven_px_action.setShortcut("Ctrl+7")
         brush_size_menu.addAction(seven_px_action)
-        seven_px_action.triggered.connect(parent.seven_px)
+        seven_px_action.triggered.connect(lambda: parent.change_brush_size(7))
 
         nine_px_action = QAction(QIcon("./icons/nine_px.png"), "9px", parent)
         nine_px_action.setShortcut("Ctrl+9")
         brush_size_menu.addAction(nine_px_action)
-        nine_px_action.triggered.connect(parent.nine_px)
+        nine_px_action.triggered.connect(lambda: parent.change_brush_size(9))
 
         # Change Brush Colors
         black_action = QAction(QIcon("./icons/black.png"), "Black", parent)
