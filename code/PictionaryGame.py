@@ -25,6 +25,9 @@ class PictionaryGame(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.player_one = None
+        self.player_two = None
+
         # set window title
         self.setWindowTitle("Phyctionary")
 
@@ -59,10 +62,14 @@ class PictionaryGame(QMainWindow):
         # Side Docks
 
         # Info Dock
-        info_dock = InfoDock(self)
-        self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, info_dock)
+        self.info_dock = InfoDock(self)
+        self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, self.info_dock)
 
         self.word_list = []
+
+    def set_players(self, player_one, player_two):
+        self.player_one, self.player_two = player_one, player_two
+        self.info_dock.set_players(player_one, player_two)
 
     # EVENT HANDLERS ============================================================
 
