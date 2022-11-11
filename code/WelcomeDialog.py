@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QFormLayout, QLineEdit
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QFormLayout, QLineEdit, QRadioButton
 
 
 class WelcomeDialog(QDialog):
@@ -8,13 +8,16 @@ class WelcomeDialog(QDialog):
         super().__init__()
 
         self.parent = parent
-        self.selected = False
+        self.game_ready = False
 
         self.setWindowTitle("Phyctionary")
         self.setModal(True)
 
         self.player_one = QLineEdit(self)
         self.player_two = QLineEdit(self)
+
+        self.easy = QRadioButton("Easy")
+        self.hard = QRadioButton("Hard")
 
         self.init_ui()
 
@@ -33,17 +36,16 @@ class WelcomeDialog(QDialog):
         layout_two.addRow(QLabel("Player 2: "), self.player_two)
         layout.addLayout(layout_two)
 
+        layout.addWidget(self.easy)
+        layout.addWidget(self.hard)
+
         button_box = QHBoxLayout()
+        button_box.addStretch()
+        start_button = QPushButton("Start")
+        button_box.addWidget(start_button)
+        button_box.addStretch()
 
-        easy_button = QPushButton("Easy")
-        button_box.addWidget(easy_button)
-
-        hard_button = QPushButton("Hard")
-        button_box.addWidget(hard_button)
-
-        # Connect signals to slots
-        easy_button.clicked.connect(lambda: self.set_choice("easy"))
-        hard_button.clicked.connect(lambda: self.set_choice("hard"))
+        start_button.click.connect(self.start_game)
 
         layout.addLayout(button_box)
         self.setLayout(layout)
@@ -54,10 +56,9 @@ class WelcomeDialog(QDialog):
         self.close()
 
     def closeEvent(self, e):
-        if not self.selected:
+        if not self.game_ready:
             exit()
 
     def keyPressEvent(self, e):
         if e.key() == Qt.Key.Key_Escape:
             return
-
