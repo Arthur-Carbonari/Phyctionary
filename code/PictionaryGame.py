@@ -14,6 +14,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QDo
 
 from MyMenuBar import MyMenuBar
 from InfoDock import InfoDock
+from WelcomeDialog import WelcomeDialog
 
 
 class PictionaryGame(QMainWindow):
@@ -62,8 +63,6 @@ class PictionaryGame(QMainWindow):
         self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, info_dock)
 
         self.word_list = []
-        self.get_list("easy")
-        self.currentWord = self.get_word()
 
     # EVENT HANDLERS ============================================================
 
@@ -156,10 +155,14 @@ class PictionaryGame(QMainWindow):
         self.image = self.image.scaled(width, height)  # scale the image from file and put it in your QImage
         self.update()  # call the update method of the widget which calls the paintEvent of this class
 
+    def start(self):
+        WelcomeDialog(self)
+        self.show()
+
 
 # This code will be executed if it is the main module but not if the module is imported
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = PictionaryGame()
-    window.show()
+    game = PictionaryGame()
+    game.start()
     app.exec()  # start the event loop running
