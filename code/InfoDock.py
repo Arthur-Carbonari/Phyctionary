@@ -24,7 +24,7 @@ class InfoDock(QDockWidget):
         info_widget = QWidget()
         info_layout = QVBoxLayout()
         info_widget.setLayout(info_layout)
-        info_widget.setMaximumSize(100, self.parent.height())
+        info_widget.setMaximumSize(150, self.parent.height())
 
         # Add controls to custom widget
         form_layout = QFormLayout()
@@ -47,3 +47,8 @@ class InfoDock(QDockWidget):
 
         # Set widget for dock
         self.setWidget(info_widget)
+
+    def set_players(self, p1, p2):
+        self.p1.setText(p1)
+
+        self.p2.setText(p2)
