@@ -11,8 +11,8 @@ class InfoDock(QDockWidget):
 
         self.current = QLabel("-")
 
-        self.p1 = QLabel("-")
-        self.p2 = QLabel("-")
+        self.player_1 = QLabel("-")
+        self.player_2 = QLabel("-")
 
         self.score_p1 = QLabel("0")
         self.score_p2 = QLabel("0")
@@ -26,7 +26,6 @@ class InfoDock(QDockWidget):
         info_widget.setLayout(info_layout)
         info_widget.setMaximumSize(150, self.parent.height())
 
-
         # Add controls to custom widget
         form_layout = QFormLayout()
         form_layout.addRow(QLabel("Current Turn:"), self.current)
@@ -35,14 +34,14 @@ class InfoDock(QDockWidget):
         info_layout.addSpacing(20)
 
         form_layout = QFormLayout()
-        form_layout.addRow(QLabel("Player 1:"), self.p1)
+        form_layout.addRow(QLabel("Player 1:"), self.player_1)
         form_layout.addRow(QLabel("Score:"), self.score_p1)
         info_layout.addLayout(form_layout)
 
         info_layout.addSpacing(20)
 
         form_layout = QFormLayout()
-        form_layout.addRow(QLabel("Player 2:"), self.p2)
+        form_layout.addRow(QLabel("Player 2:"), self.player_2)
         form_layout.addRow(QLabel("Score:"), self.score_p2)
         info_layout.addLayout(form_layout)
 
@@ -59,6 +58,6 @@ class InfoDock(QDockWidget):
         self.setWidget(info_widget)
 
     def set_players(self, p1, p2):
-        self.p1.setText(p1)
+        self.player_1.setText(p1)
 
-        self.p2.setText(p2)
+        self.player_2.setText(p2)

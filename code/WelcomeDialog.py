@@ -13,8 +13,8 @@ class WelcomeDialog(QDialog):
         self.setWindowTitle("Phyctionary")
         self.setModal(True)
 
-        self.player_one = QLineEdit(self)
-        self.player_two = QLineEdit(self)
+        self.player_1 = QLineEdit(self)
+        self.player_2 = QLineEdit(self)
 
         self.easy = QRadioButton("Easy")
         self.hard = QRadioButton("Hard")
@@ -29,11 +29,11 @@ class WelcomeDialog(QDialog):
         layout.addWidget(QLabel("Welcome to our game\nPlease select your desired game mode:"))
 
         layout_one = QFormLayout()
-        layout_one.addRow(QLabel("Player 1: "), self.player_one)
+        layout_one.addRow(QLabel("Player 1: "), self.player_1)
         layout.addLayout(layout_one)
 
         layout_two = QFormLayout()
-        layout_two.addRow(QLabel("Player 2: "), self.player_two)
+        layout_two.addRow(QLabel("Player 2: "), self.player_2)
         layout.addLayout(layout_two)
 
         layout.addWidget(self.easy)
@@ -51,10 +51,10 @@ class WelcomeDialog(QDialog):
         self.setLayout(layout)
 
     def start_game(self):
-        player_one = self.player_one.text()
-        player_two = self.player_two.text()
+        p1 = self.player_1.text()
+        p2 = self.player_2.text()
 
-        if not (player_one and player_two):
+        if not (p1 and p2):
             return
 
         if self.easy.isChecked():
@@ -64,7 +64,7 @@ class WelcomeDialog(QDialog):
         else:
             return
 
-        self.parent.set_players(player_one, player_two)
+        self.parent.set_players(p1, p2)
         self.parent.get_list(game_mode)
 
         self.game_ready = True
