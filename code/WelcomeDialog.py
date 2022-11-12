@@ -45,7 +45,7 @@ class WelcomeDialog(QDialog):
         button_box.addWidget(start_button)
         button_box.addStretch()
 
-        start_button.click.connect(self.start_game)
+        start_button.clicked.connect(self.start_game)
 
         layout.addLayout(button_box)
         self.setLayout(layout)
@@ -54,7 +54,7 @@ class WelcomeDialog(QDialog):
         player_one = self.player_one.text()
         player_two = self.player_two.text()
 
-        if not (player_one | player_two):
+        if not (player_one and player_two):
             return
 
         if self.easy.isChecked():
