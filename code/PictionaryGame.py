@@ -8,9 +8,8 @@ import random
 import sys
 
 from PyQt6.QtCore import Qt, QPoint
-from PyQt6.QtGui import QIcon, QPainter, QPen, QAction, QPixmap
-from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QDockWidget, QPushButton, QVBoxLayout, \
-    QLabel
+from PyQt6.QtGui import QIcon, QPainter, QPen, QPixmap
+from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
 
 from MyMenuBar import MyMenuBar
 from InfoDock import InfoDock
@@ -44,8 +43,6 @@ class PictionaryGame(QMainWindow):
         # image settings (default)
         self.image = QPixmap("./icons/canvas.png")  # documentation: https://doc.qt.io/qt-6/qpixmap.html
         self.image.fill(Qt.GlobalColor.white)  # documentation: https://doc.qt.io/qt-6/qpixmap.html#fill
-        main_widget = QWidget()
-        main_widget.setMaximumWidth(300)
 
         # Draw settings (default)
         self.drawing = False
