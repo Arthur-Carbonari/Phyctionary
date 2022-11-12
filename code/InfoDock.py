@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QDockWidget, QWidget, QVBoxLayout, QLabel, QPushButton, QFormLayout
+from PyQt6.QtWidgets import QDockWidget, QWidget, QVBoxLayout, QLabel, QPushButton, QFormLayout, QSpacerItem
 
 
 class InfoDock(QDockWidget):
@@ -14,8 +14,8 @@ class InfoDock(QDockWidget):
         self.p1 = QLabel("-")
         self.p2 = QLabel("-")
 
-        self.score_p1 = QLabel("-")
-        self.score_p2 = QLabel("-")
+        self.score_p1 = QLabel("0")
+        self.score_p2 = QLabel("0")
 
         self._init_ui()
 
@@ -26,14 +26,24 @@ class InfoDock(QDockWidget):
         info_widget.setLayout(info_layout)
         info_widget.setMaximumSize(150, self.parent.height())
 
+
         # Add controls to custom widget
         form_layout = QFormLayout()
-        form_layout.addRow(QLabel("Current Turn: -"), self.current)
-        form_layout.spacerItem()
-        form_layout.addRow(QLabel("Player 1: -"), self.p1)
-        form_layout.addRow(QLabel("Score: -"), self.score_p1)
-        form_layout.addRow(QLabel("Player 2: -"), self.p2)
-        form_layout.addRow(QLabel("Score: -"), self.score_p2)
+        form_layout.addRow(QLabel("Current Turn:"), self.current)
+        info_layout.addLayout(form_layout)
+
+        info_layout.addSpacing(20)
+
+        form_layout = QFormLayout()
+        form_layout.addRow(QLabel("Player 1:"), self.p1)
+        form_layout.addRow(QLabel("Score:"), self.score_p1)
+        info_layout.addLayout(form_layout)
+
+        info_layout.addSpacing(20)
+
+        form_layout = QFormLayout()
+        form_layout.addRow(QLabel("Player 2:"), self.p2)
+        form_layout.addRow(QLabel("Score:"), self.score_p2)
         info_layout.addLayout(form_layout)
 
         info_layout.addStretch(1)
