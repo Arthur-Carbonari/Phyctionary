@@ -24,8 +24,10 @@ class PictionaryGame(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.player_1 = None
-        self.player_2 = None
+        self.player_1 = ""
+        self.player_2 = ""
+
+        self.current_player = ""
 
         # set window title
         self.setWindowTitle("Phyctionary")
@@ -67,6 +69,17 @@ class PictionaryGame(QMainWindow):
     def set_players(self, player_one, player_two):
         self.player_1, self.player_2 = player_one, player_two
         self.info_dock.set_players(player_one, player_two)
+
+    def next_turn(self):
+
+        if self.current_player == self.player_1 or self.current_player == "":
+            self.current_player = self.player_2
+        else:
+            self.current_player = self.player_1
+
+        #   update current player in info dock
+
+        self.get_word()
 
     # EVENT HANDLERS ============================================================
 
