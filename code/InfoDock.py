@@ -17,16 +17,21 @@ class InfoDock(QDockWidget):
         self.score_p1 = QLabel("0")
         self.score_p2 = QLabel("0")
 
+        self.setFeatures(QDockWidget.DockWidgetFeature.NoDockWidgetFeatures)
+        self.setTitleBarWidget(QWidget())
+
         self._init_ui()
 
     def _init_ui(self):
+
         # Widget inside the Dock
         info_widget = QWidget()
         info_layout = QVBoxLayout()
         info_widget.setLayout(info_layout)
-        info_widget.setMaximumSize(150, self.parent.height())
+        info_widget.setMaximumWidth(int(self.parent.height() * 0.2))
 
-        # Add controls to custom widget
+        info_layout.addSpacing(10)
+
         form_layout = QFormLayout()
         form_layout.addRow(QLabel("Current Turn:"), self.current)
         info_layout.addLayout(form_layout)
@@ -47,6 +52,8 @@ class InfoDock(QDockWidget):
 
         info_layout.addStretch(1)
         info_layout.addWidget(QPushButton("Skip Turn"))
+
+        info_layout.addSpacing(10)
 
         # Setting colour of dock to gray
         info_widget.setAutoFillBackground(True)
