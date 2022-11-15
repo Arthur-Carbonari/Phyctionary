@@ -26,6 +26,7 @@ class PictionaryGame(QMainWindow):
         self.player_2 = ""
 
         self.current_player = ""
+        self.current_word = "test"
 
         # set window title
         self.setWindowTitle("Phyctionary")
@@ -78,8 +79,8 @@ class PictionaryGame(QMainWindow):
         main_layout.addLayout(right_layout, 4)
 
         # Adds widgets to the left layout
-        left_layout.addWidget(GuessBox())  # Dummy widget
-        left_layout.addWidget(GuessBox())  # Dummy widget
+        left_layout.addWidget(GuessBox(self))  # Dummy widget
+        left_layout.addWidget(GuessBox(self))  # Dummy widget
 
         # Adds widgets to the right layout
 
@@ -102,6 +103,14 @@ class PictionaryGame(QMainWindow):
         self.player_1, self.player_2 = player_one, player_two
         self.info_dock.set_players(player_one, player_two)
 
+    def make_a_guess(self, guess: str):
+        if guess.casefold() == self.current_word.casefold():
+            self.guess_box.output_field.append(self.current_word + " : That is right!")
+            # TODO: increment score for current player
+            # TODO: start next turn
+        else:
+            self.guess_box.output_field.append(guess + " : That is incorrect..")
+
     def next_turn(self):
 
         if self.current_player == self.player_1 or self.current_player == "":
@@ -111,7 +120,7 @@ class PictionaryGame(QMainWindow):
 
         #   update current player in info dock
 
-        self.get_word()
+        self.current_word = self.get_word()
 
     # slots
     def save(self):
