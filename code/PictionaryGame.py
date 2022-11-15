@@ -42,7 +42,7 @@ class PictionaryGame(QMainWindow):
         # Create the canvas and set it as the central widget
         self.canvas = Canvas()
 
-        self.guess_box = GuessBox()
+        self.guess_box = GuessBox(self)
 
         self._init_ui()
 
