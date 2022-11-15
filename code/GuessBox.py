@@ -30,6 +30,7 @@ class GuessBox(QFrame):
     def keyPressEvent(self, e):
         if e.key() == Qt.Key.Key_Return or e.key() == Qt.Key.Key_Enter:
             guess = self.input_field.text().strip()
+            self.input_field.setText("")
             if guess:
                 self.game.make_a_guess(guess)
 
