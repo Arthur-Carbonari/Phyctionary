@@ -1,5 +1,4 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QFormLayout, QFrame
+from PyQt6.QtWidgets import QVBoxLayout, QLabel, QPushButton, QFormLayout, QFrame
 
 
 class InfoBox(QFrame):
@@ -11,11 +10,9 @@ class InfoBox(QFrame):
 
         self.current = QLabel("-")
 
-        self.player_1 = QLabel("-")
-        self.player_2 = QLabel("-")
+        self.team_name = [QLabel("-"), QLabel("-")]
 
-        self.score_p1 = QLabel("0")
-        self.score_p2 = QLabel("0")
+        self.team_score = [QLabel("-"), QLabel("-")]
 
         self.setObjectName("InfoBox")
         self.setStyleSheet("""
@@ -43,15 +40,15 @@ class InfoBox(QFrame):
         info_layout.addSpacing(20)
 
         form_layout = QFormLayout()
-        form_layout.addRow(QLabel("Player 1:"), self.player_1)
-        form_layout.addRow(QLabel("Score:"), self.score_p1)
+        form_layout.addRow(QLabel("Player 1:"), self.team_name[0])
+        form_layout.addRow(QLabel("Score:"), self.team_score[0])
         info_layout.addLayout(form_layout)
 
         info_layout.addSpacing(20)
 
         form_layout = QFormLayout()
-        form_layout.addRow(QLabel("Player 2:"), self.player_2)
-        form_layout.addRow(QLabel("Score:"), self.score_p2)
+        form_layout.addRow(QLabel("Player 2:"), self.team_name[1])
+        form_layout.addRow(QLabel("Score:"), self.team_score[1])
         info_layout.addLayout(form_layout)
 
         info_layout.addStretch(1)
@@ -59,7 +56,7 @@ class InfoBox(QFrame):
 
         info_layout.addSpacing(10)
 
-    def set_players(self, p1, p2):
-        self.player_1.setText(p1)
+    def set_team_names(self, team_1, team_2):
+        self.team_name[0].setText(team_1)
 
-        self.player_2.setText(p2)
+        self.team_name[1].setText(team_2)

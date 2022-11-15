@@ -62,7 +62,7 @@ class WelcomeDialog(QDialog):
         else:
             return
 
-        self.game_window.set_players(p1, p2)
+        self.game_window.set_team_names(p1, p2)
         self.game_window.get_list(game_mode)
 
         self.game_ready = True
