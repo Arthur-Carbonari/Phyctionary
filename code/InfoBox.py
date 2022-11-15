@@ -17,6 +17,15 @@ class InfoBox(QFrame):
         self.score_p1 = QLabel("0")
         self.score_p2 = QLabel("0")
 
+        self.setObjectName("InfoBox")
+        self.setStyleSheet("""
+            #InfoBox {
+                background-color: gray;
+                border-radius: 8px;
+                border: 1px solid #000;
+            }
+                """)
+
         self._init_ui()
 
     def _init_ui(self):
@@ -24,7 +33,6 @@ class InfoBox(QFrame):
         # Widget inside the Dock
         info_layout = QVBoxLayout()
         self.setLayout(info_layout)
-        self.setMaximumWidth(int(self.parent.height() * 0.2))
 
         info_layout.addSpacing(10)
 
@@ -50,12 +58,6 @@ class InfoBox(QFrame):
         info_layout.addWidget(QPushButton("Skip Turn"))
 
         info_layout.addSpacing(10)
-
-        # Setting colour of dock to gray
-        self.setAutoFillBackground(True)
-        p = self.palette()
-        p.setColor(self.backgroundRole(), Qt.GlobalColor.gray)
-        self.setPalette(p)
 
     def set_players(self, p1, p2):
         self.player_1.setText(p1)
