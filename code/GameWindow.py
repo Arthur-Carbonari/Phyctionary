@@ -23,10 +23,10 @@ class GameWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.player_1 = ""
-        self.player_2 = ""
+        self.team_1 = ""
+        self.team_2 = ""
 
-        self.current_player = ""
+        self.current_team = 1
         self.current_word = "test"
 
         # set window title
@@ -102,9 +102,9 @@ class GameWindow(QMainWindow):
         right_layout.addWidget(canvas_wrapper, 5)  # Adds the wrapper to the right layout
         right_layout.addWidget(self.guess_box, 2)  # Adds the guess box to the right layout
 
-    def set_players(self, player_one, player_two):
-        self.player_1, self.player_2 = player_one, player_two
-        # self.info_dock.set_players(player_one, player_two)
+    def set_team_names(self, team_1, team_2):
+        self.team_1, self.team_2 = team_1, team_2
+        self.info_box.set_team_names(team_1, team_2)
 
     def make_a_guess(self, guess: str):
         if guess.casefold() == self.current_word.casefold():
@@ -116,10 +116,10 @@ class GameWindow(QMainWindow):
 
     def next_turn(self):
 
-        if self.current_player == self.player_1 or self.current_player == "":
-            self.current_player = self.player_2
+        if self.current_team == self.team_1 or self.current_team == "":
+            self.current_team = self.team_2
         else:
-            self.current_player = self.player_1
+            self.current_team = self.team_1
 
         #   update current player in info dock
 
