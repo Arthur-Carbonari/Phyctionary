@@ -8,11 +8,6 @@ class Canvas(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.setAutoFillBackground(True)
-        p = self.palette()
-        p.setColor(self.backgroundRole(), Qt.GlobalColor.white)
-        self.setPalette(p)
-
         self.image = QPixmap("./icons/canvas.png")  # documentation: https://doc.qt.io/qt-6/qpixmap.html
         self.image.fill(Qt.GlobalColor.white)  # documentation: https://doc.qt.io/qt-6/qpixmap.html#fill
 
