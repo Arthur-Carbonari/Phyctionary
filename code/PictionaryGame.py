@@ -8,13 +8,10 @@ import random
 import sys
 
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget, QHBoxLayout, QLabel, \
-    QVBoxLayout
+from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget, QHBoxLayout, QVBoxLayout
 
-from MyMenuBar import MyMenuBar
-from InfoDock import InfoDock
-from WelcomeDialog import WelcomeDialog
 from Canvas import Canvas
+from GuessBox import GuessBox
 
 
 class PictionaryGame(QMainWindow):
@@ -45,65 +42,61 @@ class PictionaryGame(QMainWindow):
         # Create the canvas and set it as the central widget
         self.canvas = Canvas()
 
-        main_layout = QHBoxLayout()
+        self.guess_box = GuessBox()
+
+        self._init_ui()
+
+        self.word_list = []
+
+    def _init_ui(self):
+
+        # Sets up the central widget and adds it to the main window
         central_widget = QWidget()
-        central_widget.setObjectName("body")
+        central_widget.setObjectName("container")  # Sets the object name for the stylesheet
         central_widget.setStyleSheet("""
-            #body {
+            #container {
                 background-image: url("./icons/background.png");
                 border: 2px solid #fff;
             }
         """)
-        t = QLabel("another one")
 
-        main_layout.addWidget(t, 1)
+        self.setCentralWidget(central_widget)
 
-        right_layout = QVBoxLayout()
-
-        canvas_wrapper = QWidget()
-        canvas_wrapper.setStyleSheet("""
-            background-color: white;
-            border-radius: 8px;
-            border: 1px solid #000;
-        """)
-
-        canvas_wrapper_layout = QVBoxLayout()
-        canvas_wrapper_layout.addWidget(self.canvas)
-        canvas_wrapper_layout.setContentsMargins(3, 3, 3, 3)
-
-        canvas_wrapper.setLayout(canvas_wrapper_layout)
-
-        right_layout.addWidget(canvas_wrapper, 5)
-        right_layout.setSpacing(20)
-
-        input_box = QWidget()
-        input_box.setStyleSheet("""
-            background-color: white;
-            border-radius: 8px;
-            border: 1px solid #000;
-        """)
-
-        right_layout.addWidget(input_box, 2)
-
-        main_layout.addLayout(right_layout, 2)
-
+        # Sets up the main layout for the window and adds it to the central widget
+        main_layout = QHBoxLayout(central_widget)
         main_layout.setContentsMargins(40, 40, 40, 40)
         main_layout.setSpacing(40)
 
-        central_widget.setLayout(main_layout)
+        # Sets up the left layout and adds to the main layout
+        left_layout = QHBoxLayout()
+        left_layout.setSpacing(0)
+        main_layout.addLayout(left_layout, 2)
 
-        self.setCentralWidget(central_widget)
-        # Create and set the Menu Bar
-        # menu_bar = MyMenuBar(self)
-        # self.setMenuBar(menu_bar)
+        # Sets up the right layout and adds to the main layout
+        right_layout = QVBoxLayout()
+        right_layout.setSpacing(20)
+        main_layout.addLayout(right_layout, 4)
 
-        # Side Docks
+        # Adds widgets to the left layout
+        left_layout.addWidget(GuessBox())  # Dummy widget
+        left_layout.addWidget(GuessBox())  # Dummy widget
 
-        # Info Dock
-        # self.info_dock = InfoDock(self)
-        # self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, self.info_dock)
+        # Adds widgets to the right layout
 
-        self.word_list = []
+        # ( A wrapper is needed for the canvas because we reimplement the paintEvent for the canvas class )
+        canvas_wrapper = QWidget()  # Creates wrapper widget for the canvas...
+        canvas_wrapper.setStyleSheet("""
+                    background-color: white;
+                    border-radius: 8px;
+                    border: 1px solid #000;
+                """)  # Sets the stylesheet for it...
+
+        canvas_wrapper_layout = QVBoxLayout(canvas_wrapper)  # Create the layout for the wrapper...
+        canvas_wrapper_layout.addWidget(self.canvas)  # Adds the canvas to the layout...
+        canvas_wrapper_layout.setContentsMargins(3, 3, 3, 3)  # Set the margin for layout...
+
+        right_layout.addWidget(canvas_wrapper, 5)  # Adds the wrapper to the right layout
+        right_layout.addWidget(self.guess_box, 2)  # Adds the guess box to the right layout
 
     def set_players(self, player_one, player_two):
         self.player_1, self.player_2 = player_one, player_two
