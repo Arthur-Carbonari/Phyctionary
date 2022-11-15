@@ -1,3 +1,4 @@
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QStyleOption, QStyle, QFrame, QLineEdit, QVBoxLayout, QTextEdit
 
 
@@ -23,6 +24,12 @@ class GuessBox(QFrame):
         layout = QVBoxLayout(self)
         layout.addWidget(self.output_field, 3)
         layout.addWidget(self.input_field, 1)
+
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key.Key_Return or e.key() == Qt.Key.Key_Enter:
+            guess = self.input_field.text().strip()
+            if guess:
+                self.game.make_a_guess(guess)
 
     # def paintEvent(self, e):
     #     opt = QStyleOption()
