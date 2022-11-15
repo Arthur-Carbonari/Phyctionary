@@ -33,12 +33,11 @@ class PictionaryGame(QMainWindow):
         # set window title
         self.setWindowTitle("Phyctionary")
 
-        # set the windows dimensions
-        top = 400
-        left = 400
-        width = 800
-        height = 600
-        self.setGeometry(top, left, width, height)
+        # set the windows minimum dimensions
+        width = 1200
+        height = 700
+        self.setMinimumWidth(width)
+        self.setMinimumHeight(height)
 
         # set the icon
         self.setWindowIcon(QIcon("./icons/paint-brush.png"))
