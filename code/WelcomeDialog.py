@@ -4,10 +4,10 @@ from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QHBoxLayo
 
 class WelcomeDialog(QDialog):
 
-    def __init__(self, parent):
+    def __init__(self, game_window):
         super().__init__()
 
-        self.parent = parent
+        self.game_window = game_window
         self.game_ready = False
 
         self.setWindowTitle("Phyctionary")
@@ -20,8 +20,6 @@ class WelcomeDialog(QDialog):
         self.hard = QRadioButton("Hard")
 
         self.init_ui()
-
-        self.exec()
 
     def init_ui(self):
         layout = QVBoxLayout()
@@ -64,8 +62,8 @@ class WelcomeDialog(QDialog):
         else:
             return
 
-        self.parent.set_players(p1, p2)
-        self.parent.get_list(game_mode)
+        self.game_window.set_players(p1, p2)
+        self.game_window.get_list(game_mode)
 
         self.game_ready = True
 
