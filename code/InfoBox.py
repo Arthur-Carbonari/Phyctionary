@@ -52,3 +52,8 @@ class InfoBox(QFrame):
         self.team_name[0].setText("Team 1: " + team_1)
 
         self.team_name[1].setText("Team 2: " + team_2)
+
+        self.change_current_turn(team_1)
+
+    def change_current_turn(self, team: str):
+        self.current.setText("Current Turn: " + team)
