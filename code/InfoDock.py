@@ -1,8 +1,8 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QDockWidget, QWidget, QVBoxLayout, QLabel, QPushButton, QFormLayout, QSpacerItem
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QFormLayout, QFrame
 
 
-class InfoDock(QDockWidget):
+class InfoDock(QFrame):
 
     def __init__(self, parent):
         super().__init__()
@@ -17,18 +17,14 @@ class InfoDock(QDockWidget):
         self.score_p1 = QLabel("0")
         self.score_p2 = QLabel("0")
 
-        self.setFeatures(QDockWidget.DockWidgetFeature.NoDockWidgetFeatures)
-        self.setTitleBarWidget(QWidget())
-
         self._init_ui()
 
     def _init_ui(self):
 
         # Widget inside the Dock
-        info_widget = QWidget()
         info_layout = QVBoxLayout()
-        info_widget.setLayout(info_layout)
-        info_widget.setMaximumWidth(int(self.parent.height() * 0.2))
+        self.setLayout(info_layout)
+        self.setMaximumWidth(int(self.parent.height() * 0.2))
 
         info_layout.addSpacing(10)
 
@@ -56,13 +52,10 @@ class InfoDock(QDockWidget):
         info_layout.addSpacing(10)
 
         # Setting colour of dock to gray
-        info_widget.setAutoFillBackground(True)
-        p = info_widget.palette()
-        p.setColor(info_widget.backgroundRole(), Qt.GlobalColor.gray)
-        info_widget.setPalette(p)
-
-        # Set widget for dock
-        self.setWidget(info_widget)
+        self.setAutoFillBackground(True)
+        p = self.palette()
+        p.setColor(self.backgroundRole(), Qt.GlobalColor.gray)
+        self.setPalette(p)
 
     def set_players(self, p1, p2):
         self.player_1.setText(p1)
