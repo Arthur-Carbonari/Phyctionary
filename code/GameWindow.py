@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget, QHB
 
 from Canvas import Canvas
 from GuessBox import GuessBox
+from InfoBox import InfoBox
 
 
 class GameWindow(QMainWindow):
@@ -41,6 +42,8 @@ class GameWindow(QMainWindow):
         self.setWindowIcon(QIcon("./icons/paint-brush.png"))
 
         # Create the canvas and set it as the central widget
+        self.info_box = InfoBox(self)
+
         self.canvas = Canvas()
 
         self.guess_box = GuessBox(self)
@@ -79,8 +82,8 @@ class GameWindow(QMainWindow):
         main_layout.addLayout(right_layout, 4)
 
         # Adds widgets to the left layout
-        left_layout.addWidget(GuessBox(self))  # Dummy widget
-        left_layout.addWidget(GuessBox(self))  # Dummy widget
+        left_layout.addWidget(self.info_box, 1)  # Dummy widget
+        left_layout.addWidget(GuessBox(self), 1)  # Dummy widget
 
         # Adds widgets to the right layout
 
