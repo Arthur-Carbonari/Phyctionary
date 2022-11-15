@@ -2,7 +2,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QFormLayout, QFrame
 
 
-class InfoDock(QFrame):
+class InfoBox(QFrame):
 
     def __init__(self, parent):
         super().__init__()
