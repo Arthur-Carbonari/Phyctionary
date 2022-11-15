@@ -6,6 +6,11 @@ class GuessBox(QFrame):
     def __init__(self):
         super().__init__()
 
+        self.output_field = QTextEdit()
+        self.output_field.setReadOnly(True)
+
+        self.input_field = QLineEdit(self)
+
         self.setStyleSheet("""
                     background-color: white;
                     border-radius: 8px;
