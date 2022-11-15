@@ -17,6 +17,13 @@ class GuessBox(QFrame):
                     border: 1px solid #000;
         """)
 
+        self._init_ui()
+
+    def _init_ui(self):
+        layout = QVBoxLayout(self)
+        layout.addWidget(self.output_field, 3)
+        layout.addWidget(self.input_field, 1)
+
     # def paintEvent(self, e):
     #     opt = QStyleOption()
     #     opt.initFrom(self)
