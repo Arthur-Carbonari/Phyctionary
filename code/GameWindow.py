@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget, QHB
 from Canvas import Canvas
 from GuessBox import GuessBox
 from InfoBox import InfoBox
+from ControllersBox import ControllersBox
 
 
 class GameWindow(QMainWindow):
@@ -43,6 +44,8 @@ class GameWindow(QMainWindow):
 
         # Create the canvas and set it as the central widget
         self.info_box = InfoBox(self)
+
+        self.controllers_box = ControllersBox(self)
 
         self.canvas = Canvas()
 
@@ -83,7 +86,7 @@ class GameWindow(QMainWindow):
 
         # Adds widgets to the left layout
         left_layout.addWidget(self.info_box, 1)  # Dummy widget
-        left_layout.addWidget(GuessBox(self), 1)  # Dummy widget
+        left_layout.addWidget(self.controllers_box, 1)  # Dummy widget
 
         # Adds widgets to the right layout
 
