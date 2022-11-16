@@ -6,8 +6,8 @@ class ControllersBox(QFrame):
     def __init__(self, game):
         super().__init__()
         layout = QVBoxLayout(self)
-        wid = QWidget()
-        layout.addWidget(wid, 1)
+        color_controllers = QFrame()
+        layout.addWidget(color_controllers)
         self._init_ui()
 
     def _init_ui(self):
@@ -15,7 +15,6 @@ class ControllersBox(QFrame):
         self.setStyleSheet("""
             #ControllersBox {
                 background-color: #142d4c;
-                opacity: 0,5;
                 border-radius: 8px;
                 border: 1px solid #000;
             }
