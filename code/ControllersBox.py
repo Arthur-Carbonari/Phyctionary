@@ -13,7 +13,12 @@ class ControllersBox(QFrame):
         super().__init__()
         layout = QVBoxLayout(self)
         color_pallete = self.get_color_pallete()
+
+        color_pallete.setObjectName("ColorPallete")
+        color_pallete.setStyleSheet("#ColorPallete {border: 1px solid #000;}")
+
         layout.addWidget(color_pallete)
+        layout.addStretch(1)
         self._init_ui()
 
     def _init_ui(self):
