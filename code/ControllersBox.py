@@ -100,11 +100,14 @@ class ControllersBox(QFrame):
         self.current_color_button.setStyleSheet("background-color: %s;" % color)
         self.game.canvas.change_tool_color(color)
 
+    def change_current_tool(self, tool_name):
+        self.game.canvas.change_current_tool(tool_name)
+
     def populate_tool_buttons_grid(self):
-        tools = [ToolButton("./icons/paint-brush.png", self.test, "brush"),
-                 ToolButton("./icons/paint-brush.png", self.test, "eraser"),
-                 ToolButton("./icons/paint-brush.png", self.test, "spray"),
-                 ToolButton("./icons/paint-brush.png", self.test, "bucket"),
+        tools = [ToolButton("./icons/paint-brush.png", self.change_current_tool, "brush"),
+                 ToolButton("./icons/paint-brush.png", self.change_current_tool, "eraser"),
+                 ToolButton("./icons/paint-brush.png", self.change_current_tool, "spray"),
+                 ToolButton("./icons/paint-brush.png", self.change_current_tool, "bucket"),
                  ToolButton("./icons/save.png", self.test),
                  ToolButton("./icons/paint-brush.png", self.test),  # open
                  ToolButton("./icons/clear.png", self.test),
