@@ -124,6 +124,14 @@ class ControllersBox(QFrame):
 
     #  SLOTS ================================================
 
+    def increase_tool_size(self):
+        current_size = self.size_slider.value()
+        self.size_slider.setValue(current_size + 1)
+
+    def decrease_tool_size(self):
+        current_size = self.size_slider.value()
+        self.size_slider.setValue(current_size - 1)
+
     def test(self, parameter):
         print(parameter)
 
