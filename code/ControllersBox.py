@@ -104,7 +104,7 @@ class ControllersBox(QFrame):
                  ToolButton("./icons/save.png", self.save),
                  ToolButton("./icons/open.png", self.game.canvas.open),  # open
                  ToolButton("./icons/clear.png", self.clear),
-                 ToolButton("./icons/insert.png", self.game.canvas.insert_image),  # insert image
+                 ToolButton("./icons/insert.png", self.game.canvas.insert_image),  # insert drawing
                  ToolButton("./icons/undo.png", self.undo),  # undo
                  ToolButton("./icons/redo.png", self.redo)]  # do
 
