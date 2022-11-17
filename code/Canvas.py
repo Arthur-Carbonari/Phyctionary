@@ -134,3 +134,19 @@ class Canvas(QWidget):
 
     def resizeEvent(self, event):
         self.image = self.image.scaled(self.width(), self.height())
+
+    # helper methods
+
+    def _read_image_from_file(self):
+
+        pm = QPixmap()
+
+        file_path, _ = QFileDialog.getOpenFileName(self, "Open Image", "",
+                                                   "PNG(*.png);;JPG(*.jpg *.jpeg);;All Files (*.*)")
+        if file_path == "":  # if not file is selected exit
+            return
+        with open(file_path, 'rb') as f:  # open the file in binary mode for reading
+            content = f.read()  # read the file
+        pm.loadFromData(content)  # load the data into the file
+
+        return pm
