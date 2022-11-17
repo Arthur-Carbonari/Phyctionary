@@ -11,9 +11,9 @@ class DrawingTool:
         self.canvas = canvas
         self.last_point = None
 
-    @abc.abstractmethod
     def mouse_press(self, event):
-        pass
+        # save the location of the mouse press as the lastPoint
+        self.last_point = event.pos()
 
     @abc.abstractmethod
     def mouse_drag(self, event):
@@ -21,9 +21,6 @@ class DrawingTool:
 
 
 class PaintBrush(DrawingTool):
-
-    def mouse_press(self, event):
-        self.last_point = event.pos()  # save the location of the mouse press as the lastPoint
 
     def mouse_drag(self, event):
         painter = QPainter(self.canvas.image)  # object which allows drawing to take place on an image
@@ -36,6 +33,27 @@ class PaintBrush(DrawingTool):
         painter.drawLine(self.last_point, event.pos())
 
         # set the last point to refer to the point we have just moved to, this helps when drawing the next segment
+        self.last_point = event.pos()
+
+
+class Eraser(DrawingTool):
+
+    def mouse_press(self, event):
+        super().mouse_press(event)
+        self._erase(event)
+
+    def mouse_drag(self, event):
+        self._erase(event)
+
+    def _erase(self, event):
+        painter = QPainter(self.canvas.image)
+
+        painter.setPen(QPen(QColor(255, 255, 255, 0), self.canvas.tool_size * 3, Qt.PenStyle.SolidLine,
+                            Qt.PenCapStyle.RoundCap, Qt.PenJoinStyle.RoundJoin))
+
+        painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Clear)
+        painter.drawLine(self.last_point, event.pos())
+
         self.last_point = event.pos()
 
 
