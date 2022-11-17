@@ -29,7 +29,7 @@ class GameWindow(QMainWindow):
         self.team_2 = ""
 
         self.current_team = 1
-        self.current_word = "test"
+        self.current_word = ""
 
         # set window title
         self.setWindowTitle("Phyctionary")
@@ -143,6 +143,6 @@ class GameWindow(QMainWindow):
             for row in csv_reader:
                 self.word_list += row
 
-    def start(self):
-        # WelcomeDialog(self)
-        self.show()
+    def start_game(self):
+        self.current_word = self.get_word()
+        print(self.current_word)

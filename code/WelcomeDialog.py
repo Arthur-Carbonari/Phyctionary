@@ -69,6 +69,8 @@ class WelcomeDialog(QDialog):
 
         self.close()
 
+        self.game_window.start_game()
+
     def closeEvent(self, e):
         if not self.game_ready:
             exit()
