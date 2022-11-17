@@ -131,6 +131,8 @@ class GameWindow(QMainWindow):
 
     def next_turn(self):
 
+        self.guess_box.output_field.append("Phyctionary: It is your turn now team " + self.team[self.current_team])
+
         if self.current_team == 1:
             self.current_team = 2
         else:
@@ -141,6 +143,7 @@ class GameWindow(QMainWindow):
         self.canvas.reset()
 
         self.current_word = self.get_word()
+        self.info_box.set_current_word(self.current_word)
 
     # Get a random word from the list read from file
     def get_word(self):
@@ -158,3 +161,7 @@ class GameWindow(QMainWindow):
     def start_game(self):
         self.current_team = 1
         self.current_word = self.get_word()
+        self.info_box.set_current_word(self.current_word)
+        self.guess_box.output_field.append("Phyctionary: Welcome, please click on 'show word' to see your word, and"
+                                           " then click again to hide it and start drawing, carefully so that your "
+                                           "partner dont see the word.\nGood Luck!")

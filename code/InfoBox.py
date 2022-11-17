@@ -15,6 +15,12 @@ class InfoBox(QFrame):
 
         self.team_score = [None, QLabel("Score: 0"), QLabel("Score: 0")]
 
+        self.show_word_button = QPushButton("Show Word")
+        self.current_word = QLabel("test")
+        self.current_word.hide()
+        self.show_word = False
+        self.show_word_button.clicked.connect(self.toggle_show_word)
+
         self.setObjectName("InfoBox")
         self.setStyleSheet("""
             #InfoBox {
@@ -56,19 +62,32 @@ class InfoBox(QFrame):
         info_layout.addWidget(separator)
         info_layout.addStretch(1)
 
-
         info_layout.addWidget(self.team_name[2])
         info_layout.addSpacing(10)
         info_layout.addWidget(self.team_score[2])
 
-        info_layout.addStretch(5)
+        separator = QFrame()
+        separator.setFrameShape(QFrame.Shape.HLine)
+        separator.setLineWidth(1)
+
+        info_layout.addStretch(1)
+        info_layout.addWidget(separator)
+        info_layout.addStretch(1)
+
+        info_layout.addStretch(4)
+
+        info_layout.addWidget(self.current_word)
+        info_layout.addWidget(self.show_word_button)
+
+        info_layout.addSpacing(20)
+
         info_layout.addWidget(QPushButton("Skip Turn"))
 
         info_layout.addSpacing(10)
-        
+
         # Font size
 
-        font_size = 18
+        font_size = 15
         font = 'Times'
 
         self.current.setFont(QFont(font, font_size))
@@ -78,6 +97,8 @@ class InfoBox(QFrame):
 
         self.team_score[1].setFont(QFont(font, font_size))
         self.team_score[2].setFont(QFont(font, font_size))
+
+        self.current_word.setFont(QFont(font, font_size))
 
     def set_team_names(self, team_1: str, team_2: str):
         self.team_name[1].setText("Team 1: \n" + team_1)
@@ -91,3 +112,18 @@ class InfoBox(QFrame):
 
     def set_team_score(self, team: int, new_score: int):
         self.team_score[team].setText("Score: %s" % new_score)
+
+    def set_current_word(self, word: str):
+        self.current_word.hide()
+        self.current_word.setText(word)
+
+    # Slots =====
+
+    def toggle_show_word(self):
+
+        if self.show_word:
+            self.current_word.hide()
+            self.show_word = False
+        else:
+            self.current_word.show()
+            self.show_word = True
