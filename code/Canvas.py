@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt, QPoint
-from PyQt6.QtGui import QPainter, QPixmap, QPen
+from PyQt6.QtGui import QPainter, QPixmap, QPen, QColor
 from PyQt6.QtWidgets import QWidget
 
 
@@ -13,18 +13,18 @@ class Canvas(QWidget):
 
         # Draw settings (default)
         self.drawing = False
-        self.brushSize = 3
-        self.brushColor = Qt.GlobalColor.black  # documentation: https://doc.qt.io/qt-6/qt.html#GlobalColor-enum
+        self.brush_size = 3
+        self.tool_color = "#000000"  # documentation: https://doc.qt.io/qt-6/qt.html#GlobalColor-enum
 
         # Reference to last point recorded by mouse
-        self.lastPoint = QPoint()  # documentation: https://doc.qt.io/qt-6/qpoint.html
+        self.last_point = QPoint()  # documentation: https://doc.qt.io/qt-6/qpoint.html
 
     # Slots ========================================
-    def change_brush_size(self, px_size):
-        self.brushSize = px_size
+    def change_tool_size(self, px_size):
+        self.brush_size = px_size
 
-    def change_brush_color(self, color):
-        self.brushColor = Qt.GlobalColor[color]
+    def change_tool_color(self, color):
+        self.tool_color = color
 
     def clear(self):
         self.image.fill(Qt.GlobalColor.white)  # fill the image with white
@@ -34,22 +34,22 @@ class Canvas(QWidget):
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:  # if the pressed button is the left button
             self.drawing = True  # enter drawing mode
-            self.lastPoint = event.pos()  # save the location of the mouse press as the lastPoint
-            print(self.lastPoint)  # print the lastPoint for debugging purposes
+            self.last_point = event.pos()  # save the location of the mouse press as the lastPoint
+            print(self.last_point)  # print the lastPoint for debugging purposes
 
     def mouseMoveEvent(self, event):
         if self.drawing:
             painter = QPainter(self.image)  # object which allows drawing to take place on an image
 
             # allows the selection of brush colour, brish size, line type, cap type, join type.
-            painter.setPen(QPen(self.brushColor, self.brushSize, Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap,
+            painter.setPen(QPen(QColor(self.tool_color), self.brush_size, Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap,
                                 Qt.PenJoinStyle.RoundJoin))
 
             # draw a line from the point of the original press to the point to where the mouse was dragged to
-            painter.drawLine(self.lastPoint, event.pos())
+            painter.drawLine(self.last_point, event.pos())
 
             # set the last point to refer to the point we have just moved to, this helps when drawing the next segment
-            self.lastPoint = event.pos()
+            self.last_point = event.pos()
 
             # call the update method of the widget which calls the paintEvent of this class
             self.update()
