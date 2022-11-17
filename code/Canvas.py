@@ -81,6 +81,20 @@ class Canvas(QWidget):
 
         self.update()
 
+    def open(self):
+
+        file_path, _ = QFileDialog.getOpenFileName(self, "Open Image", "",
+                                                   "PNG(*.png);;JPG(*.jpg *.jpeg);;All Files (*.*)")
+        if file_path == "":  # if not file is selected exit
+            return
+        with open(file_path, 'rb') as f:  # open the file in binary mode for reading
+            content = f.read()  # read the file
+        self.canvas_background.loadFromData(content)  # load the data into the file
+        width = self.width()  # get the width of the current QImage in your application
+        height = self.height()  # get the height of the current QImage in your application
+        self.canvas_background = self.canvas_background.scaled(width, height)  # scale the image from file
+        self.update()  # call the update method of the widget which calls the paintEvent of this class
+
     # Events =======================================
     def mousePressEvent(self, event):
 

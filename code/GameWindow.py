@@ -43,12 +43,11 @@ class GameWindow(QMainWindow):
         # set the icon
         self.setWindowIcon(QIcon("./icons/paint-brush.png"))
 
-        # Create the canvas and set it as the central widget
+        self.canvas = Canvas()
+
         self.info_box = InfoBox(self)
 
         self.controllers_box = ControllersBox(self)
-
-        self.canvas = Canvas()
 
         self.guess_box = GuessBox(self)
 
@@ -147,24 +146,3 @@ class GameWindow(QMainWindow):
     def start(self):
         # WelcomeDialog(self)
         self.show()
-
-    # def open(self):
-    #     """
-    #     This is an additional function which is not part of the tutorial. It will allow you to:
-    #      - open a file dialog box,
-    #      - filter the list of files according to file extension
-    #      - set the QImage of your application (self.image) to a scaled version of the file
-    #      - update the widget
-    #     """
-    #
-    #     file_path, _ = QFileDialog.getOpenFileName(self, "Open Image", "",
-    #                                                "PNG(*.png);;JPG(*.jpg *.jpeg);;All Files (*.*)")
-    #     if file_path == "":  # if not file is selected exit
-    #         return
-    #     with open(file_path, 'rb') as f:  # open the file in binary mode for reading
-    #         content = f.read()  # read the file
-    #     self.image.loadFromData(content)  # load the data into the file
-    #     width = self.width()  # get the width of the current QImage in your application
-    #     height = self.height()  # get the height of the current QImage in your application
-    #     self.image = self.image.scaled(width, height)  # scale the image from file and put it in your QImage
-    #     self.update()  # call the update method of the widget which calls the paintEvent of this class
