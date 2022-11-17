@@ -11,8 +11,7 @@ class MyMenuBar(QMenuBar):
 
         # Add menus to menu bar
         file_menu = self.addMenu(" File")  # Add file menu to the menu bar, "File" is reserved in Mac
-        tool_size_menu = self.addMenu(" Tool Size")  # Add the "Brush Size" menu to the menu bar
-        tool_color_menu = self.addMenu(" Tool Colour")  # Add the "Brush Colour" menu to the menu bar
+        tool_menu = self.addMenu(" Tool")  # Add the "Brush Size" menu to the menu bar
 
         # Save Action
         save_action = QAction(QIcon("./icons/save.png"), "Save", parent)  # Create a save action with an icon
@@ -38,21 +37,41 @@ class MyMenuBar(QMenuBar):
         file_menu.addAction(redo_action)  # Add this action to the file menu
         redo_action.triggered.connect(parent.canvas.redo)  # Connect action to respective slot
 
-        # Change Brush Thickness
+        # Change Tool Thickness
         increase_tool_size = QAction(QIcon(), "Increase brush size", parent)
         increase_tool_size.setShortcut("Ctrl++")
-        tool_size_menu.addAction(increase_tool_size)  # connect the action to the function below
+        tool_menu.addAction(increase_tool_size)  # connect the action to the function below
         increase_tool_size.triggered.connect(parent.controllers_box.increase_tool_size)
 
-        # Change Brush Thickness
         decrease_tool_size = QAction(QIcon("./icons/three_px.png"), "Decrease brush size", parent)
         decrease_tool_size.setShortcut("Ctrl+-")
-        tool_size_menu.addAction(decrease_tool_size)  # connect the action to the function below
+        tool_menu.addAction(decrease_tool_size)  # connect the action to the function below
         decrease_tool_size.triggered.connect(parent.controllers_box.decrease_tool_size)
 
-        # Change Brush Colors
+        # Change Tool
+        change_to_brush = QAction(QIcon("./icons/paint-brush.png"), "Brush", parent)
+        change_to_brush.setShortcut("Ctrl+Alt+B")
+        tool_menu.addAction(change_to_brush)  # connect the action to the function below
+        change_to_brush.triggered.connect(lambda: parent.canvas.change_current_tool("brush"))
+
+        change_to_eraser = QAction(QIcon("./icons/eraser.png"), "Eraser", parent)
+        change_to_eraser.setShortcut("Ctrl+Alt+E")
+        tool_menu.addAction(change_to_eraser)  # connect the action to the function below
+        change_to_eraser.triggered.connect(lambda: parent.canvas.change_current_tool("eraser"))
+
+        change_to_spray = QAction(QIcon("./icons/spray.png"), "Spray", parent)
+        change_to_spray.setShortcut("Ctrl+Alt+S")
+        tool_menu.addAction(change_to_spray)  # connect the action to the function below
+        change_to_spray.triggered.connect(lambda: parent.canvas.change_current_tool("spray"))
+
+        change_to_bucket = QAction(QIcon("./icons/bucket.png"), "Bucket", parent)
+        change_to_bucket.setShortcut("Ctrl+Alt+F")
+        tool_menu.addAction(change_to_bucket)  # connect the action to the function below
+        change_to_bucket.triggered.connect(lambda: parent.canvas.change_current_tool("bucket"))
+
+        # Change Tool Colors
         black_action = QAction(QIcon("./icons/black.png"), "Black", parent)
         black_action.setShortcut("Ctrl+B")
-        tool_color_menu.addAction(black_action)
+        tool_menu.addAction(black_action)
         black_action.triggered.connect(lambda: parent.controllers_box.change_current_color("#000000"))
 
