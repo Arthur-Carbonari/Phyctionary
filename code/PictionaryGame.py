@@ -21,8 +21,8 @@ class PictionaryGame:
         self.welcome_dialog = WelcomeDialog(self.game_window)
 
     def start(self):
-        self.welcome_dialog.exec()
         self.game_window.show()
+        self.welcome_dialog.exec()
 
 
 # This code will be executed if it is the main module but not if the module is imported

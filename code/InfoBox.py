@@ -80,14 +80,14 @@ class InfoBox(QFrame):
         self.team_score[2].setFont(QFont(font, font_size))
 
     def set_team_names(self, team_1: str, team_2: str):
-        self.team_name[1].setText("Team 1: " + team_1)
+        self.team_name[1].setText("Team 1: \n" + team_1)
 
-        self.team_name[2].setText("Team 2: " + team_2)
+        self.team_name[2].setText("Team 2: \n" + team_2)
 
-        self.current.setText("Current Turn: " + team_1)
+        self.current.setText("Current Turn: \n" + team_1)
 
     def change_current_turn(self, team: str):
-        self.current.setText("Current Turn: " + team)
+        self.current.setText("Current Turn: \n" + team)
 
     def set_team_score(self, team: int, new_score: int):
         self.team_score[team].setText("Score: %s" % new_score)
