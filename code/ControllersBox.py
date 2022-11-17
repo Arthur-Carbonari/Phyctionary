@@ -31,11 +31,46 @@ class ControllersBox(QFrame):
             }
         """)
 
-    def get_color_pallete(self):
-        color_pallete = QGroupBox()
-        layout = QGridLayout()
-        color_pallete.setLayout(layout)
+    def test(self, parameter):
+        print(parameter)
 
+    def set_color_from_dialog(self):
+        color = QColorDialog.getColor(QColor(self.current_color)).name()
+
+        if color == self.current_color:
+            return
+
+        self.set_current_color(color)
+
+    def set_current_color(self, color):
+        self.current_color = color
+        self.current_color_button.setStyleSheet("background-color: %s;" % color)
+        self.game.canvas.change_tool_color(color)
+
+    def populate_tool_buttons_grid(self):
+        tools = [ToolButton("./icons/paint-brush.png", self.test, "brush"),
+                 ToolButton("./icons/paint-brush.png", self.test, "eraser"),
+                 ToolButton("./icons/paint-brush.png", self.test, "spray"),
+                 ToolButton("./icons/paint-brush.png", self.test, "bucket"),
+                 ToolButton("./icons/save.png", self.test),
+                 ToolButton("./icons/paint-brush.png", self.test),  # open
+                 ToolButton("./icons/clear.png", self.test),
+                 ToolButton("./icons/paint-brush.png", self.test),  # undo
+                 ToolButton("./icons/paint-brush.png", self.test)]  # do
+
+        row, clm = 0, 0
+
+        for tool in tools:
+            self.tool_buttons_grid.addWidget(tool, row, clm)
+
+            if clm == 1:
+                clm = 0
+                row += 1
+            else:
+                clm = 1
+
+    def populate_color_pallete(self):
+        
         col, row = 0, 0
 
         for color in ControllersBox.colors:
@@ -68,4 +103,4 @@ class ColorButton(QPushButton):
         self.color = color
         self.setFixedSize(QtCore.QSize(24, 24))
         self.setStyleSheet("background-color: %s;" % color)
-        self.clicked.connect(lambda: controller_box.change_selected_color(color))
+        self.clicked.connect(lambda: controller_box.set_current_color(color))
