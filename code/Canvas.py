@@ -13,7 +13,7 @@ class Canvas(QWidget):
 
         # Draw settings (default)
         self.drawing = False
-        self.brush_size = 3
+        self.tool_size = 3
         self.tool_color = "#000000"  # documentation: https://doc.qt.io/qt-6/qt.html#GlobalColor-enum
 
         # Reference to last point recorded by mouse
@@ -21,7 +21,7 @@ class Canvas(QWidget):
 
     # Slots ========================================
     def change_tool_size(self, px_size):
-        self.brush_size = px_size
+        self.tool_size = px_size
 
     def change_tool_color(self, color):
         self.tool_color = color
@@ -42,7 +42,7 @@ class Canvas(QWidget):
             painter = QPainter(self.image)  # object which allows drawing to take place on an image
 
             # allows the selection of brush colour, brish size, line type, cap type, join type.
-            painter.setPen(QPen(QColor(self.tool_color), self.brush_size, Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap,
+            painter.setPen(QPen(QColor(self.tool_color), self.tool_size, Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap,
                                 Qt.PenJoinStyle.RoundJoin))
 
             # draw a line from the point of the original press to the point to where the mouse was dragged to
