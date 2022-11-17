@@ -14,6 +14,7 @@ from Canvas import Canvas
 from GuessBox import GuessBox
 from InfoBox import InfoBox
 from ControllersBox import ControllersBox
+from MyMenuBar import MyMenuBar
 
 
 class GameWindow(QMainWindow):
@@ -50,6 +51,8 @@ class GameWindow(QMainWindow):
         self.canvas = Canvas()
 
         self.guess_box = GuessBox(self)
+
+        self.setMenuBar(MyMenuBar(self))
 
         self._init_ui()
 
