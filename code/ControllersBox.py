@@ -30,8 +30,9 @@ class ControllersBox(QFrame):
         self.current_color_button.setStyleSheet("background-color: #000;")
 
         self.more_color_button = QPushButton()
-        self.more_color_button.setFixedSize(QtCore.QSize(36, 36))
-        self.more_color_button.setStyleSheet("background-color: #123;")
+        self.more_color_button.setIcon(QIcon("./icons/colour.png"))
+        self.more_color_button.setIconSize(QtCore.QSize(36, 36))
+        self.more_color_button.setStyleSheet("background-color: rgba(0,0,0,0);")
         self.more_color_button.clicked.connect(self.set_color_from_dialog)
 
         self.size_slider = QSlider()
@@ -144,9 +145,9 @@ class ControllersBox(QFrame):
         if color == self.current_color:
             return
 
-        self.set_current_color(color)
+        self.change_current_color(color)
 
-    def set_current_color(self, color):
+    def change_current_color(self, color):
         self.current_color = color
         self.current_color_button.setStyleSheet("background-color: %s;" % color)
         self.game.canvas.change_tool_color(color)
@@ -187,4 +188,4 @@ class ColorButton(QPushButton):
         self.color = color
         self.setFixedSize(QtCore.QSize(24, 24))
         self.setStyleSheet("background-color: %s;" % color)
-        self.clicked.connect(lambda: controller_box.set_current_color(color))
+        self.clicked.connect(lambda: controller_box.change_current_color(color))
