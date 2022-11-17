@@ -28,7 +28,7 @@ class GameWindow(QMainWindow):
         self.team_1 = ""
         self.team_2 = ""
 
-        self.current_team = 1
+        self.current_team = ""
         self.current_word = ""
 
         # set window title
@@ -112,21 +112,31 @@ class GameWindow(QMainWindow):
         self.info_box.set_team_names(team_1, team_2)
 
     def make_a_guess(self, guess: str):
+
+        self.guess_box.output_field.append(self.current_team + " :" + guess)
+
         if guess.casefold() == self.current_word.casefold():
-            self.guess_box.output_field.append(self.current_word + " : That is right!")
-            # TODO: increment score for current player
-            # TODO: start next turn
+            self.correct_guess()
+
         else:
-            self.guess_box.output_field.append(guess + " : That is incorrect..")
+            self.guess_box.output_field.append("Phyctionary: That is incorrect..")
+
+    def correct_guess(self):
+        self.guess_box.output_field.append("Phyctionary: That is correct!!!")
+
+        self.info_box.set_team_score(self.current_team)
+        self.next_turn()
 
     def next_turn(self):
 
-        if self.current_team == self.team_1 or self.current_team == "":
+        if self.current_team == self.team_1:
             self.current_team = self.team_2
         else:
             self.current_team = self.team_1
 
-        #   update current player in info dock
+        self.info_box.change_current_turn(self.current_team)
+
+        self.canvas.reset()
 
         self.current_word = self.get_word()
 
@@ -144,5 +154,5 @@ class GameWindow(QMainWindow):
                 self.word_list += row
 
     def start_game(self):
+        self.current_team = self.team_1
         self.current_word = self.get_word()
-        print(self.current_word)
