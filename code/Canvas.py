@@ -21,6 +21,9 @@ class Canvas(QWidget):
             "spray": PaintSpray(self)
         }
 
+        self.undo_stack = []
+        self.do_stack = []
+
         self.current_tool = self.tool_kit["brush"]
 
         # Draw settings (default)
@@ -54,11 +57,29 @@ class Canvas(QWidget):
             return  # do nothing and return
         self.image.save(file_path)  # save file image to the file path
 
+    def undo(self):
+
+        if len(self.undo_stack) == 0:
+            return
+
+        previous_state = self.undo_stack.pop()
+
+        self.do_stack.append(self.image)
+        self.image = previous_state
+
+        self.update()
+
     # Events =======================================
     def mousePressEvent(self, event):
 
         if event.button() == Qt.MouseButton.LeftButton:  # if the pressed button is the left button
             self.drawing = True  # enter drawing mode
+
+            if len(self.undo_stack) > 9:
+                self.undo_stack.pop(0)
+
+            self.undo_stack.append(self.image.copy())
+
             self.current_tool.mouse_press(event)
             self.update()
 
@@ -75,6 +96,7 @@ class Canvas(QWidget):
 
         if event.button() == Qt.MouseButton.LeftButton:  # if the released button is the left button
             self.drawing = False  # exit drawing mode
+
 
     def paintEvent(self, event):
         # you should only create and use the QPainter object in this method, it should be a local variable
