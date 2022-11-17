@@ -125,6 +125,8 @@ class GameWindow(QMainWindow):
         self.guess_box.output_field.append("Phyctionary: That is correct!!!")
         self.guess_box.output_field.append("=================================")
 
+        self.score[self.current_team] += 1
+        self.info_box.set_team_score(self.current_team, self.score[self.current_team])
         self.next_turn()
 
     def next_turn(self):
