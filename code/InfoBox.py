@@ -17,7 +17,7 @@ class InfoBox(QFrame):
         self.setObjectName("InfoBox")
         self.setStyleSheet("""
             #InfoBox {
-                background-color: gray;
+                background-color: #f5f5f5;
                 border-radius: 8px;
                 border: 1px solid #000;
             }
