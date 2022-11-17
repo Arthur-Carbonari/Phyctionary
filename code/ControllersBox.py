@@ -73,7 +73,7 @@ class ControllersBox(QFrame):
 
         row_wrapper = QHBoxLayout()
         row_wrapper.addStretch(1)
-        row_wrapper.addWidget(self.current_color_button)
+        row_wrapper.addWidget(self.current_color_display)
         row_wrapper.addWidget(self.more_color_button)
         row_wrapper.addStretch(1)
         main_layout.addLayout(row_wrapper)
@@ -96,7 +96,7 @@ class ControllersBox(QFrame):
                  ToolButton("./icons/save.png", self.save),
                  ToolButton("./icons/open.png", self.game.canvas.open),  # open
                  ToolButton("./icons/clear.png", self.clear),
-                 ToolButton("./icons/open.png", self.game.canvas.insert_image),  # insert image
+                 ToolButton("./icons/insert.png", self.game.canvas.insert_image),  # insert image
                  ToolButton("./icons/undo.png", self.undo),  # undo
                  ToolButton("./icons/redo.png", self.redo)]  # do
 
@@ -150,7 +150,7 @@ class ControllersBox(QFrame):
 
     def change_current_color(self, color):
         self.current_color = color
-        self.current_color_button.setStyleSheet("background-color: %s;" % color)
+        self.current_color_display.setStyleSheet("background-color: %s;" % color)
         self.game.canvas.change_tool_color(color)
 
     def change_current_tool(self, tool_name):
