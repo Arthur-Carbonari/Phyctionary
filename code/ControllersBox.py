@@ -19,22 +19,11 @@ class ControllersBox(QFrame):
 
         self.current_color = "#000000"
 
-        layout = QVBoxLayout(self)
-        layout.addStretch(1)
-
         self.tool_buttons_grid = QGridLayout()
         self.populate_tool_buttons_grid()
-        button = QToolButton()
-        button.setIconSize(QtCore.QSize(36, 36))
-        button.setIcon(QIcon("./icons/paint-brush.png"))
-
-        layout.addLayout(self.tool_buttons_grid)
 
         self.color_pallete = QGridLayout()
         self.populate_color_pallete()
-
-        layout.addLayout(self.color_pallete)
-        layout.addSpacing(10)
 
         self.current_color_button = QPushButton()
         self.current_color_button.setFixedSize(QtCore.QSize(36, 36))
@@ -45,31 +34,15 @@ class ControllersBox(QFrame):
         self.more_color_button.setStyleSheet("background-color: #123;")
         self.more_color_button.clicked.connect(self.set_color_from_dialog)
 
-        row_wrapper = QHBoxLayout()
-        row_wrapper.addStretch(1)
-        row_wrapper.addWidget(self.current_color_button)
-        row_wrapper.addWidget(self.more_color_button)
-        row_wrapper.addStretch(1)
-        layout.addLayout(row_wrapper)
-
-        layout.addSpacing(20)
-
-        size_slider = QSlider()
-        size_slider.setMinimum(1)
-        size_slider.setMaximum(10)
-        size_slider.setTickPosition(QSlider.TickPosition.TicksBothSides)
-        size_slider.setTickInterval(1)
-
-        slider_wrapper = QHBoxLayout()
-        slider_wrapper.addStretch(1)
-        slider_wrapper.addWidget(size_slider)
-        slider_wrapper.addStretch(1)
-        layout.addLayout(slider_wrapper)
-
-        layout.addStretch(1)
+        self.size_slider = QSlider()
+        self.size_slider.setMinimum(1)
+        self.size_slider.setMaximum(10)
+        self.size_slider.setTickPosition(QSlider.TickPosition.TicksBothSides)
+        self.size_slider.setTickInterval(1)
         self._init_ui()
 
     def _init_ui(self):
+
         self.setObjectName("ControllersBox")
         self.setStyleSheet("""
             #ControllersBox {
@@ -84,30 +57,32 @@ class ControllersBox(QFrame):
             }
         """)
 
-    def test(self, parameter):
-        print(parameter)
+        main_layout = QVBoxLayout(self)
 
-    def set_color_from_dialog(self):
-        color = QColorDialog.getColor(QColor(self.current_color)).name()
+        main_layout.addStretch(1)
 
-        if color == self.current_color:
-            return
+        main_layout.addLayout(self.tool_buttons_grid)
 
-        self.set_current_color(color)
+        main_layout.addLayout(self.color_pallete)
 
-    def set_current_color(self, color):
-        self.current_color = color
-        self.current_color_button.setStyleSheet("background-color: %s;" % color)
-        self.game.canvas.change_tool_color(color)
+        main_layout.addSpacing(10)
 
-    def change_current_tool(self, tool_name):
-        self.game.canvas.change_current_tool(tool_name)
+        row_wrapper = QHBoxLayout()
+        row_wrapper.addStretch(1)
+        row_wrapper.addWidget(self.current_color_button)
+        row_wrapper.addWidget(self.more_color_button)
+        row_wrapper.addStretch(1)
+        main_layout.addLayout(row_wrapper)
 
-    def clear(self):
-        self.game.canvas.clear()
+        main_layout.addSpacing(20)
 
-    def save(self):
-        self.game.canvas.save()
+        slider_wrapper = QHBoxLayout()
+        slider_wrapper.addStretch(1)
+        slider_wrapper.addWidget(self.size_slider)
+        slider_wrapper.addStretch(1)
+        main_layout.addLayout(slider_wrapper)
+
+        main_layout.addStretch(1)
 
     def populate_tool_buttons_grid(self):
         tools = [ToolButton("./icons/paint-brush.png", self.change_current_tool, "brush"),
@@ -143,6 +118,33 @@ class ControllersBox(QFrame):
             else:
                 row = 0
                 col += 1
+
+    #  SLOTS ================================================
+
+    def test(self, parameter):
+        print(parameter)
+
+    def set_color_from_dialog(self):
+        color = QColorDialog.getColor(QColor(self.current_color)).name()
+
+        if color == self.current_color:
+            return
+
+        self.set_current_color(color)
+
+    def set_current_color(self, color):
+        self.current_color = color
+        self.current_color_button.setStyleSheet("background-color: %s;" % color)
+        self.game.canvas.change_tool_color(color)
+
+    def change_current_tool(self, tool_name):
+        self.game.canvas.change_current_tool(tool_name)
+
+    def clear(self):
+        self.game.canvas.clear()
+
+    def save(self):
+        self.game.canvas.save()
 
 
 class ToolButton(QToolButton):
