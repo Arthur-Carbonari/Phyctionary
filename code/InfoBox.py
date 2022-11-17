@@ -21,6 +21,9 @@ class InfoBox(QFrame):
         self.show_word = False
         self.show_word_button.clicked.connect(self.toggle_show_word)
 
+        self.skip_button = QPushButton("Skip Turn")
+        self.skip_button.clicked.connect(parent.skip_turn)
+
         self.setObjectName("InfoBox")
         self.setStyleSheet("""
             #InfoBox {
@@ -81,7 +84,7 @@ class InfoBox(QFrame):
 
         info_layout.addSpacing(20)
 
-        info_layout.addWidget(QPushButton("Skip Turn"))
+        info_layout.addWidget(self.skip_button)
 
         info_layout.addSpacing(10)
 

@@ -131,14 +131,14 @@ class GameWindow(QMainWindow):
 
     def next_turn(self):
 
-        self.guess_box.output_field.append("Phyctionary: It is your turn now team " + self.team[self.current_team])
-
         if self.current_team == 1:
             self.current_team = 2
         else:
             self.current_team = 1
 
         self.info_box.change_current_turn(self.team[self.current_team])
+
+        self.guess_box.output_field.append("Phyctionary: It is your turn now team " + self.team[self.current_team])
 
         self.canvas.reset()
 
@@ -165,3 +165,9 @@ class GameWindow(QMainWindow):
         self.guess_box.output_field.append("Phyctionary: Welcome, please click on 'show word' to see your word, and"
                                            " then click again to hide it and start drawing, carefully so that your "
                                            "partner dont see the word.\nGood Luck!")
+
+    def skip_turn(self):
+        self.guess_box.output_field.append("Team %s skipped their turn." % self.team[self.current_team])
+        self.guess_box.output_field.append("=================================")
+
+        self.next_turn()

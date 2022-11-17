@@ -92,8 +92,15 @@ class MyMenuBar(QMenuBar):
         change_to_bucket.triggered.connect(lambda: parent.canvas.change_current_tool("bucket"))
 
         # Change Tool Colors
-        black_action = QAction(QIcon("./icons/black.png"), "Black", parent)
-        black_action.setShortcut("Ctrl+B")
-        tool_menu.addAction(black_action)
-        black_action.triggered.connect(lambda: parent.controllers_box.change_current_color("#000000"))
+        skip_turn_action = QAction(QIcon("./icons/black.png"), "Black", parent)
+        skip_turn_action.setShortcut("Ctrl+B")
+        tool_menu.addAction(skip_turn_action)
+        skip_turn_action.triggered.connect(lambda: parent.controllers_box.change_current_color("#000000"))
+
+        # Skip Turn
+        skip_turn_action = QAction(QIcon("./icons/skip.png"), "Skip Turn", parent)
+        skip_turn_action.setShortcut("Ctrl+Shift+S")
+        tool_menu.addAction(skip_turn_action)
+        skip_turn_action.triggered.connect(parent.skip_turn)
+
 
