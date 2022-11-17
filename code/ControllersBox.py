@@ -96,7 +96,7 @@ class ControllersBox(QFrame):
                  ToolButton("./icons/paint-brush.png", self.test),  # open
                  ToolButton("./icons/clear.png", self.clear),
                  ToolButton("./icons/paint-brush.png", self.undo),  # undo
-                 ToolButton("./icons/paint-brush.png", self.test)]  # do
+                 ToolButton("./icons/paint-brush.png", self.redo)]  # do
 
         row, clm = 0, 0
 
@@ -130,7 +130,6 @@ class ControllersBox(QFrame):
     def change_tool_size(self):
         self.game.canvas.change_tool_size(self.size_slider.value())
 
-
     def set_color_from_dialog(self):
         color = QColorDialog.getColor(QColor(self.current_color)).name()
 
@@ -155,6 +154,9 @@ class ControllersBox(QFrame):
 
     def undo(self):
         self.game.canvas.undo()
+
+    def redo(self):
+        self.game.canvas.redo()
 
 
 class ToolButton(QToolButton):
