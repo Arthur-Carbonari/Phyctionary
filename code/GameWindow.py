@@ -25,14 +25,14 @@ class GameWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.team_1 = ""
-        self.team_2 = ""
+        self.team = [None, "", ""]
+        self.score = [None, 0, 0]
 
-        self.current_team = ""
+        self.current_team = 0
         self.current_word = ""
 
         # set window title
-        self.setWindowTitle("Phyctionary")
+        self.setWindowTitle("Phyctionary")  # Cause its python, get it?
 
         # set the windows minimum dimensions
         width = 1200
@@ -108,12 +108,12 @@ class GameWindow(QMainWindow):
         right_layout.addWidget(self.guess_box, 2)  # Adds the guess box to the right layout
 
     def set_team_names(self, team_1, team_2):
-        self.team_1, self.team_2 = team_1, team_2
+        self.team[1], self.team[2] = team_1, team_2
         self.info_box.set_team_names(team_1, team_2)
 
     def make_a_guess(self, guess: str):
 
-        self.guess_box.output_field.append(self.current_team + " :" + guess)
+        self.guess_box.output_field.append(self.team[self.current_team] + " :" + guess)
 
         if guess.casefold() == self.current_word.casefold():
             self.correct_guess()
@@ -123,18 +123,18 @@ class GameWindow(QMainWindow):
 
     def correct_guess(self):
         self.guess_box.output_field.append("Phyctionary: That is correct!!!")
+        self.guess_box.output_field.append("=================================")
 
-        self.info_box.set_team_score(self.current_team)
         self.next_turn()
 
     def next_turn(self):
 
-        if self.current_team == self.team_1:
-            self.current_team = self.team_2
+        if self.current_team == 1:
+            self.current_team = 2
         else:
-            self.current_team = self.team_1
+            self.current_team = 1
 
-        self.info_box.change_current_turn(self.current_team)
+        self.info_box.change_current_turn(self.team[self.current_team])
 
         self.canvas.reset()
 
@@ -154,5 +154,5 @@ class GameWindow(QMainWindow):
                 self.word_list += row
 
     def start_game(self):
-        self.current_team = self.team_1
+        self.current_team = 1
         self.current_word = self.get_word()
