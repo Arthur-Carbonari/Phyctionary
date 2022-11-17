@@ -36,11 +36,11 @@ class ControllersBox(QFrame):
         self.more_color_button.clicked.connect(self.set_color_from_dialog)
 
         self.size_slider = QSlider()
-        self.size_slider.setMinimum(1)
-        self.size_slider.setMaximum(10)
-        self.size_slider.setValue(3)
+        self.size_slider.setMinimum(2)
+        self.size_slider.setMaximum(20)
+        self.size_slider.setValue(4)
         self.size_slider.setTickPosition(QSlider.TickPosition.TicksBothSides)
-        self.size_slider.setTickInterval(1)
+        self.size_slider.setTickInterval(2)
         self.size_slider.valueChanged.connect(self.change_tool_size)
 
         self._init_ui()
