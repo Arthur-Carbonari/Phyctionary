@@ -30,40 +30,40 @@ class MyMenuBar(QMenuBar):
         three_px_action = QAction(QIcon("./icons/three_px.png"), "3px", parent)
         three_px_action.setShortcut("Ctrl+3")
         brush_size_menu.addAction(three_px_action)  # connect the action to the function below
-        three_px_action.triggered.connect(lambda: parent.canvas.change_brush_size(3))
+        three_px_action.triggered.connect(lambda: parent.canvas.change_tool_size(3))
 
         five_px_action = QAction(QIcon("./icons/five_px.png"), "5px", parent)
         five_px_action.setShortcut("Ctrl+5")
         brush_size_menu.addAction(five_px_action)
-        five_px_action.triggered.connect(lambda: parent.canvas.change_brush_size(5))
+        five_px_action.triggered.connect(lambda: parent.canvas.change_tool_size(5))
 
         seven_px_action = QAction(QIcon("./icons/seven_px.png"), "7px", parent)
         seven_px_action.setShortcut("Ctrl+7")
         brush_size_menu.addAction(seven_px_action)
-        seven_px_action.triggered.connect(lambda: parent.canvas.change_brush_size(7))
+        seven_px_action.triggered.connect(lambda: parent.canvas.change_tool_size(7))
 
         nine_px_action = QAction(QIcon("./icons/nine_px.png"), "9px", parent)
         nine_px_action.setShortcut("Ctrl+9")
         brush_size_menu.addAction(nine_px_action)
-        nine_px_action.triggered.connect(lambda: parent.canvas.change_brush_size(9))
+        nine_px_action.triggered.connect(lambda: parent.canvas.change_tool_size(9))
 
         # Change Brush Colors
         black_action = QAction(QIcon("./icons/black.png"), "Black", parent)
         black_action.setShortcut("Ctrl+B")
         brush_color_menu.addAction(black_action)
-        black_action.triggered.connect(lambda: parent.canvas.change_brush_color("black"))
+        black_action.triggered.connect(lambda: parent.canvas.change_tool_color("black"))
 
         red_action = QAction(QIcon("./icons/red.png"), "Red", parent)
         red_action.setShortcut("Ctrl+R")
         brush_color_menu.addAction(red_action)
-        red_action.triggered.connect(lambda: parent.canvas.change_brush_color("red"))
+        red_action.triggered.connect(lambda: parent.canvas.change_tool_color("red"))
 
         green_action = QAction(QIcon("./icons/green.png"), "Green", parent)
         green_action.setShortcut("Ctrl+G")
         brush_color_menu.addAction(green_action)
-        green_action.triggered.connect(lambda: parent.canvas.change_brush_color("green"))
+        green_action.triggered.connect(lambda: parent.canvas.change_tool_color("green"))
 
         yellow_action = QAction(QIcon("./icons/yellow.png"), "Yellow", parent)
         yellow_action.setShortcut("Ctrl+Y")
         brush_color_menu.addAction(yellow_action)
-        yellow_action.triggered.connect(lambda: parent.canvas.change_brush_color("yellow"))
+        yellow_action.triggered.connect(lambda: parent.canvas.change_tool_color("yellow"))
