@@ -25,15 +25,21 @@ class ControllersBox(QFrame):
         self.color_pallete = QGridLayout()
         self.populate_color_pallete()
 
-        self.current_color_button = QPushButton()
-        self.current_color_button.setFixedSize(QtCore.QSize(36, 36))
-        self.current_color_button.setStyleSheet("background-color: #000;")
+        self.current_color_display = QPushButton()
+        self.current_color_display.setDisabled(True)
+        self.current_color_display.setFixedSize(QtCore.QSize(36, 36))
+        self.current_color_display.setStyleSheet("background-color: #000;")
 
         self.more_color_button = QPushButton()
         self.more_color_button.setIcon(QIcon("./icons/colour.png"))
         self.more_color_button.setIconSize(QtCore.QSize(36, 36))
         self.more_color_button.setStyleSheet("background-color: rgba(0,0,0,0);")
         self.more_color_button.clicked.connect(self.set_color_from_dialog)
+
+        self.current_size_display = QPushButton()
+        self.current_size_display.setDisabled(True)
+        self.current_size_display.setFixedSize(3, 3)
+        self.current_size_display.setStyleSheet("background-color: #000;")
 
         self.size_slider = QSlider()
         self.size_slider.setMinimum(2)
@@ -81,6 +87,8 @@ class ControllersBox(QFrame):
         main_layout.addSpacing(20)
 
         slider_wrapper = QHBoxLayout()
+        slider_wrapper.addStretch(1)
+        slider_wrapper.addWidget(self.current_size_display)
         slider_wrapper.addStretch(1)
         slider_wrapper.addWidget(self.size_slider)
         slider_wrapper.addStretch(1)
@@ -138,7 +146,11 @@ class ControllersBox(QFrame):
         print(parameter)
 
     def change_tool_size(self):
-        self.game.canvas.change_tool_size(self.size_slider.value())
+        new_size = self.size_slider.value()
+
+        self.current_size_display.setFixedSize(new_size, new_size)
+
+        self.game.canvas.change_tool_size(new_size)
 
     def set_color_from_dialog(self):
         color = QColorDialog.getColor(QColor(self.current_color)).name()
