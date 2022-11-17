@@ -22,20 +22,31 @@ class WelcomeDialog(QDialog):
         self.init_ui()
 
     def init_ui(self):
+
+        self.setFixedSize(250, 250)
+
         layout = QVBoxLayout()
 
-        layout.addWidget(QLabel("Welcome to our game\nPlease select your desired game mode:"))
+        layout.addWidget(QLabel("Welcome, please enter your team`s name\nAnd select the desired game mode:"))
+
+        layout.addStretch(1)
 
         layout_one = QFormLayout()
         layout_one.addRow(QLabel("Player 1: "), self.player_1)
         layout.addLayout(layout_one)
 
+        layout.addStretch(1)
+
         layout_two = QFormLayout()
         layout_two.addRow(QLabel("Player 2: "), self.player_2)
         layout.addLayout(layout_two)
 
+        layout.addStretch(1)
+
         layout.addWidget(self.easy)
         layout.addWidget(self.hard)
+
+        layout.addStretch(1)
 
         button_box = QHBoxLayout()
         button_box.addStretch()
