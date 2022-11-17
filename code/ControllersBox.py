@@ -96,8 +96,8 @@ class ControllersBox(QFrame):
                  ToolButton("./icons/save.png", self.save),
                  ToolButton("./icons/paint-brush.png", self.test),  # open
                  ToolButton("./icons/clear.png", self.clear),
-                 ToolButton("./icons/paint-brush.png", self.undo),  # undo
-                 ToolButton("./icons/paint-brush.png", self.redo)]  # do
+                 ToolButton("./icons/undo.png", self.undo),  # undo
+                 ToolButton("./icons/redo.png", self.redo)]  # do
 
         row, clm = 0, 0
 
