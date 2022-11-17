@@ -50,7 +50,7 @@ class WelcomeDialog(QDialog):
 
         button_box = QHBoxLayout()
         button_box.addStretch()
-        start_button = QPushButton("Start")
+        start_button = QPushButton("Start Game")
         button_box.addWidget(start_button)
         button_box.addStretch()
 

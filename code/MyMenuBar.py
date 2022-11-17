@@ -1,5 +1,5 @@
 from PyQt6.QtGui import QAction, QIcon
-from PyQt6.QtWidgets import QMenuBar
+from PyQt6.QtWidgets import QMenuBar, QMessageBox
 
 
 class MyMenuBar(QMenuBar):
@@ -7,11 +7,13 @@ class MyMenuBar(QMenuBar):
     def __init__(self, parent):
         super().__init__()
 
+        self.parent = parent
         self.setNativeMenuBar(False)
 
         # Add menus to menu bar
-        file_menu = self.addMenu(" File")  # Add file menu to the menu bar, "File" is reserved in Mac
-        tool_menu = self.addMenu(" Tool")  # Add the "Brush Size" menu to the menu bar
+        file_menu = self.addMenu(" File")  # Add file menu to the menu bar
+        tool_menu = self.addMenu(" Tool")  # Add the "Tool" menu to the menu bar
+        help_menu = self.addMenu(" Help")  # Add the "Help" menu to the menu bar
 
         # File Menu ========================
 
@@ -92,15 +94,60 @@ class MyMenuBar(QMenuBar):
         change_to_bucket.triggered.connect(lambda: parent.canvas.change_current_tool("bucket"))
 
         # Change Tool Colors
-        skip_turn_action = QAction(QIcon("./icons/black.png"), "Black", parent)
-        skip_turn_action.setShortcut("Ctrl+B")
-        tool_menu.addAction(skip_turn_action)
-        skip_turn_action.triggered.connect(lambda: parent.controllers_box.change_current_color("#000000"))
+        black_action = QAction(QIcon("./icons/black.png"), "Black", parent)
+        black_action.setShortcut("Ctrl+B")
+        tool_menu.addAction(black_action)
+        black_action.triggered.connect(lambda: parent.controllers_box.change_current_color("#000000"))
 
         # Skip Turn
         skip_turn_action = QAction(QIcon("./icons/skip.png"), "Skip Turn", parent)
         skip_turn_action.setShortcut("Ctrl+Shift+S")
         tool_menu.addAction(skip_turn_action)
         skip_turn_action.triggered.connect(parent.skip_turn)
+
+        # Help Menu
+
+        # Help
+        about_action = QAction(QIcon(), "Help", parent)
+        about_action.setShortcut("Ctrl+H")
+        help_menu.addAction(about_action)
+        about_action.triggered.connect(self.display_help_dialog)
+
+        # About
+        about_action = QAction(QIcon(), "About", parent)
+        about_action.setShortcut("Ctrl+A")
+        help_menu.addAction(about_action)
+        about_action.triggered.connect(self.display_about_dialog)
+
+    def display_help_dialog(self):
+
+        help_text = """
+        Pictionary is a charades-inspired word-guessing game
+        If you dont know how to play the game this is a quick version of the rules:
+        
+        - Split yourselves into 2 teams
+        - The team that starts select someone from the team to draw
+        - That person, and only that person, sees the secret word
+        - He will then draw a drawing of whatever the word is
+        - Then the team mates will try guess what was the word
+        - When they have guessed correctly their team is awarded 1 point
+        - Or they can skip their turn if they cant guess the word
+        - Then the next team goes and does the same
+        - And that will repeat every turn for the rest of the game
+        
+        """
+
+        QMessageBox.information(self.parent, "Help", help_text)
+
+    def display_about_dialog(self):
+        about_text = """
+        
+        This app was design and created by Arthur Martins using Pyqt6, in 2022.
+        I hope it will be able to entertain you for at least a couple of hours of fun.
+        
+        """
+
+        QMessageBox.information(self.parent, "About", about_text)
+
 
 
