@@ -37,8 +37,11 @@ class ControllersBox(QFrame):
         self.size_slider = QSlider()
         self.size_slider.setMinimum(1)
         self.size_slider.setMaximum(10)
+        self.size_slider.setValue(3)
         self.size_slider.setTickPosition(QSlider.TickPosition.TicksBothSides)
         self.size_slider.setTickInterval(1)
+        self.size_slider.valueChanged.connect(self.change_tool_size)
+
         self._init_ui()
 
     def _init_ui(self):
@@ -123,6 +126,10 @@ class ControllersBox(QFrame):
 
     def test(self, parameter):
         print(parameter)
+
+    def change_tool_size(self):
+        self.game.canvas.change_tool_size(self.size_slider.value())
+
 
     def set_color_from_dialog(self):
         color = QColorDialog.getColor(QColor(self.current_color)).name()
