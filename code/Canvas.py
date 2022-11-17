@@ -22,7 +22,7 @@ class Canvas(QWidget):
         }
 
         self.undo_stack = []
-        self.do_stack = []
+        self.redo_stack = []
 
         self.current_tool = self.tool_kit["brush"]
 
@@ -64,8 +64,20 @@ class Canvas(QWidget):
 
         previous_state = self.undo_stack.pop()
 
-        self.do_stack.append(self.image)
+        self.redo_stack.append(self.image)
         self.image = previous_state
+
+        self.update()
+
+    def redo(self):
+
+        if len(self.redo_stack) == 0:
+            return
+
+        new_state = self.redo_stack.pop()
+
+        self.undo_stack.append(self.image)
+        self.image = new_state
 
         self.update()
 
@@ -74,6 +86,9 @@ class Canvas(QWidget):
 
         if event.button() == Qt.MouseButton.LeftButton:  # if the pressed button is the left button
             self.drawing = True  # enter drawing mode
+
+            if len(self.redo_stack) > 0:
+                self.redo_stack = []
 
             if len(self.undo_stack) > 9:
                 self.undo_stack.pop(0)
@@ -96,7 +111,6 @@ class Canvas(QWidget):
 
         if event.button() == Qt.MouseButton.LeftButton:  # if the released button is the left button
             self.drawing = False  # exit drawing mode
-
 
     def paintEvent(self, event):
         # you should only create and use the QPainter object in this method, it should be a local variable
