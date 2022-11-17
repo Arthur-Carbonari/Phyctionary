@@ -103,6 +103,9 @@ class ControllersBox(QFrame):
     def change_current_tool(self, tool_name):
         self.game.canvas.change_current_tool(tool_name)
 
+    def clear(self):
+        self.game.canvas.clear()
+
     def populate_tool_buttons_grid(self):
         tools = [ToolButton("./icons/paint-brush.png", self.change_current_tool, "brush"),
                  ToolButton("./icons/paint-brush.png", self.change_current_tool, "eraser"),
@@ -110,7 +113,7 @@ class ControllersBox(QFrame):
                  ToolButton("./icons/paint-brush.png", self.change_current_tool, "bucket"),
                  ToolButton("./icons/save.png", self.test),
                  ToolButton("./icons/paint-brush.png", self.test),  # open
-                 ToolButton("./icons/clear.png", self.test),
+                 ToolButton("./icons/clear.png", self.clear),
                  ToolButton("./icons/paint-brush.png", self.test),  # undo
                  ToolButton("./icons/paint-brush.png", self.test)]  # do
 
