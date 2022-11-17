@@ -38,10 +38,12 @@ class InfoBox(QFrame):
         info_layout.addSpacing(20)
 
         info_layout.addWidget(self.team_name[0])
+        info_layout.addWidget(self.team_score[0])
 
         info_layout.addSpacing(20)
 
         info_layout.addWidget(self.team_name[1])
+        info_layout.addWidget(self.team_score[1])
 
         info_layout.addStretch(1)
         info_layout.addWidget(QPushButton("Skip Turn"))
@@ -57,3 +59,6 @@ class InfoBox(QFrame):
 
     def change_current_turn(self, team: str):
         self.current.setText("Current Turn: " + team)
+
+    def set_team_score(self, team: int, new_score: int):
+        self.team_score[team].setText("Score: %s" % new_score)
