@@ -51,6 +51,12 @@ class MyMenuBar(QMenuBar):
         file_menu.addAction(redo_action)  # Add this action to the file menu
         redo_action.triggered.connect(parent.canvas.redo)  # Connect action to respective slot
 
+        # Exit action
+        exit_action = QAction(QIcon("./icons/exit.png"), "Exit", parent)  # Create a clear action with icon
+        exit_action.setShortcut("Alt+X")  # Connect this clear action to a keyboard shortcut
+        file_menu.addAction(exit_action)  # Add this action to the file menu
+        exit_action.triggered.connect(exit)  # Connect action to respective slot
+
         # Tool Menu ========================
 
         # Change Tool Thickness
