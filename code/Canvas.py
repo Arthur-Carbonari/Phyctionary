@@ -29,6 +29,10 @@ class Canvas(QWidget):
         self.last_point = QPoint()  # documentation: https://doc.qt.io/qt-6/qpoint.html
 
     # Slots ========================================
+
+    def change_current_tool(self, tool_name):
+        self.current_tool = self.tool_kit[tool_name]
+
     def change_tool_size(self, px_size):
         self.tool_size = px_size
 
