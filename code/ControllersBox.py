@@ -95,7 +95,7 @@ class ControllersBox(QFrame):
                  ToolButton("./icons/save.png", self.save),
                  ToolButton("./icons/paint-brush.png", self.test),  # open
                  ToolButton("./icons/clear.png", self.clear),
-                 ToolButton("./icons/paint-brush.png", self.test),  # undo
+                 ToolButton("./icons/paint-brush.png", self.undo),  # undo
                  ToolButton("./icons/paint-brush.png", self.test)]  # do
 
         row, clm = 0, 0
@@ -152,6 +152,9 @@ class ControllersBox(QFrame):
 
     def save(self):
         self.game.canvas.save()
+
+    def undo(self):
+        self.game.canvas.undo()
 
 
 class ToolButton(QToolButton):
