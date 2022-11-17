@@ -10,7 +10,7 @@ class Canvas(QWidget):
     def __init__(self):
         super().__init__()
         self.canvas_background = QPixmap()  # documentation: https://doc.qt.io/qt-6/qpixmap.html
-        self.canvas_background.fill(Qt.GlobalColor.white)
+        self.canvas_background.fill(QColor("#f5f5f5"))
 
         self.drawing = QPixmap("./icons/canvas.png")  # documentation: https://doc.qt.io/qt-6/qpixmap.html
         self.drawing.fill(Qt.GlobalColor.transparent)  # documentation: https://doc.qt.io/qt-6/qpixmap.html#fill

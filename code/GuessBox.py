@@ -15,7 +15,7 @@ class GuessBox(QFrame):
         self.input_field = QLineEdit(self)
 
         self.setStyleSheet("""
-                    background-color: white;
+                    background-color: #f5f5f5;
                     border-radius: 8px;
                     border: 1px solid #000;
         """)
