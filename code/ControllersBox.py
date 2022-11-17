@@ -47,10 +47,18 @@ class ControllersBox(QFrame):
                 row = 0
                 col += 1
 
-        return color_pallete
 
-    def change_selected_color(self, color):
-        print(color)
+class ToolButton(QToolButton):
+
+    def __init__(self, icon_path, slot, parameter=None):
+        super().__init__()
+        self.setIconSize(QtCore.QSize(36, 36))
+        self.setIcon(QIcon(icon_path))
+
+        if parameter:
+            self.clicked.connect(lambda: slot(parameter))
+        else:
+            self.clicked.connect(slot)
 
 
 class ColorButton(QPushButton):
