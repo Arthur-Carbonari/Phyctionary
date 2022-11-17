@@ -34,6 +34,13 @@ class Canvas(QWidget):
         # Reference to last point recorded by mouse
         self.last_point = QPoint()  # documentation: https://doc.qt.io/qt-6/qpoint.html
 
+    def reset(self):
+        self.clear()
+        self.undo_stack = []
+        self.redo_stack = []
+
+        self.current_tool = self.tool_kit["brush"]
+
     # Slots ========================================
 
     def change_current_tool(self, tool_name):
