@@ -10,9 +10,9 @@ class InfoBox(QFrame):
 
         self.current = QLabel("Current Turn: ")
 
-        self.team_name = [QLabel("Team 1: -"), QLabel("Team 2: -")]
+        self.team_name = [None, QLabel("Team 1: -"), QLabel("Team 2: -")]
 
-        self.team_score = [QLabel("Score: 0"), QLabel("Score: 0")]
+        self.team_score = [None, QLabel("Score: 0"), QLabel("Score: 0")]
 
         self.setObjectName("InfoBox")
         self.setStyleSheet("""
@@ -37,13 +37,13 @@ class InfoBox(QFrame):
 
         info_layout.addSpacing(20)
 
-        info_layout.addWidget(self.team_name[0])
-        info_layout.addWidget(self.team_score[0])
+        info_layout.addWidget(self.team_name[1])
+        info_layout.addWidget(self.team_score[1])
 
         info_layout.addSpacing(20)
 
-        info_layout.addWidget(self.team_name[1])
-        info_layout.addWidget(self.team_score[1])
+        info_layout.addWidget(self.team_name[2])
+        info_layout.addWidget(self.team_score[2])
 
         info_layout.addStretch(1)
         info_layout.addWidget(QPushButton("Skip Turn"))
@@ -51,11 +51,11 @@ class InfoBox(QFrame):
         info_layout.addSpacing(10)
 
     def set_team_names(self, team_1: str, team_2: str):
-        self.team_name[0].setText("Team 1: " + team_1)
+        self.team_name[1].setText("Team 1: " + team_1)
 
-        self.team_name[1].setText("Team 2: " + team_2)
+        self.team_name[2].setText("Team 2: " + team_2)
 
-        self.change_current_turn(team_1)
+        self.current.setText("Current Turn: " + team_1)
 
     def change_current_turn(self, team: str):
         self.current.setText("Current Turn: " + team)
