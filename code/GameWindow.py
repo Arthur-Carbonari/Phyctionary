@@ -128,14 +128,6 @@ class GameWindow(QMainWindow):
 
         self.current_word = self.get_word()
 
-    # slots
-    def save(self):
-        file_path, _ = QFileDialog.getSaveFileName(self, "Save Image", "",
-                                                   "PNG(*.png);;JPG(*.jpg *.jpeg);;All Files (*.*)")
-        if file_path == "":  # if the file path is empty
-            return  # do nothing and return
-        self.canvas.image.save(file_path)  # save file image to the file path
-
     # Get a random word from the list read from file
     def get_word(self):
         random_word = random.choice(self.word_list)

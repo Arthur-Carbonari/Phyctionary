@@ -30,6 +30,13 @@ class Canvas(QWidget):
         self.image.fill(Qt.GlobalColor.white)  # fill the image with white
         self.update()  # call the update method of the widget which calls the paintEvent of this class
 
+    def save(self):
+        file_path, _ = QFileDialog.getSaveFileName(self, "Save Image", "",
+                                                   "PNG(*.png);;JPG(*.jpg *.jpeg);;All Files (*.*)")
+        if file_path == "":  # if the file path is empty
+            return  # do nothing and return
+        self.image.save(file_path)  # save file image to the file path
+
     # Events =======================================
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:  # if the pressed button is the left button
