@@ -1,7 +1,7 @@
 import abc
 import random
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QRect, QPoint, QSize
 from PyQt6.QtGui import QPainter, QPen, QColor
 
 
@@ -48,11 +48,14 @@ class Eraser(DrawingTool):
     def _erase(self, event):
         painter = QPainter(self.canvas.image)
 
-        painter.setPen(QPen(QColor(255, 255, 255, 0), self.canvas.tool_size * 3, Qt.PenStyle.SolidLine,
+        painter.setPen(QPen(QColor(255, 255, 255, 0), 1, Qt.PenStyle.SolidLine,
                             Qt.PenCapStyle.RoundCap, Qt.PenJoinStyle.RoundJoin))
 
         painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Clear)
-        painter.drawLine(self.last_point, event.pos())
+
+        rec = QRect(QPoint(), self.canvas.tool_size * 5 * QSize())
+        rec.moveCenter(event.pos())
+        painter.eraseRect(rec)
 
         self.last_point = event.pos()
 
