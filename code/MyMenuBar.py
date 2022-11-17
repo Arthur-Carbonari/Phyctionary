@@ -13,11 +13,25 @@ class MyMenuBar(QMenuBar):
         file_menu = self.addMenu(" File")  # Add file menu to the menu bar, "File" is reserved in Mac
         tool_menu = self.addMenu(" Tool")  # Add the "Brush Size" menu to the menu bar
 
+        # File Menu ========================
+
         # Save Action
         save_action = QAction(QIcon("./icons/save.png"), "Save", parent)  # Create a save action with an icon
         save_action.setShortcut("Ctrl+S")  # Connect this save action to a keyboard shortcut
         file_menu.addAction(save_action)  # Add the save action to the file menu
         save_action.triggered.connect(parent.canvas.save)  # Connect action to respective slot
+
+        # Open Action
+        open_action = QAction(QIcon("./icons/open.png"), "Open", parent)  # Create a save action with an icon
+        open_action.setShortcut("Ctrl+O")  # Connect this save action to a keyboard shortcut
+        file_menu.addAction(open_action)  # Add the save action to the file menu
+        open_action.triggered.connect(parent.canvas.open)  # Connect action to respective slot
+
+        # Insert Action
+        insert_action = QAction(QIcon("./icons/insert.png"), "Insert Image", parent)  # Create a save action with an icon
+        insert_action.setShortcut("Ctrl+I")  # Connect this save action to a keyboard shortcut
+        file_menu.addAction(insert_action)  # Add the save action to the file menu
+        insert_action.triggered.connect(parent.canvas.insert_image)  # Connect action to respective slot
 
         # Clear Action
         clear_action = QAction(QIcon("./icons/clear.png"), "Clear", parent)  # Create a clear action with icon
@@ -36,6 +50,8 @@ class MyMenuBar(QMenuBar):
         redo_action.setShortcut("Ctrl+Y")  # Connect this clear action to a keyboard shortcut
         file_menu.addAction(redo_action)  # Add this action to the file menu
         redo_action.triggered.connect(parent.canvas.redo)  # Connect action to respective slot
+
+        # Tool Menu ========================
 
         # Change Tool Thickness
         increase_tool_size = QAction(QIcon(), "Increase brush size", parent)
