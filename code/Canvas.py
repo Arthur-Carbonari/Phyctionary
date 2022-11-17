@@ -1,6 +1,8 @@
 from PyQt6.QtCore import Qt, QPoint
 from PyQt6.QtGui import QPainter, QPixmap, QPen, QColor
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget, QFileDialog
+
+from DrawingTool import PaintBrush, PaintSpray
 
 
 class Canvas(QWidget):
@@ -10,6 +12,13 @@ class Canvas(QWidget):
 
         self.image = QPixmap("./icons/canvas.png")  # documentation: https://doc.qt.io/qt-6/qpixmap.html
         self.image.fill(Qt.GlobalColor.white)  # documentation: https://doc.qt.io/qt-6/qpixmap.html#fill
+
+        self.tool_kit = {
+            "brush": PaintBrush(self),
+            "spray": PaintSpray(self)
+        }
+
+        self.current_tool = self.tool_kit["brush"]
 
         # Draw settings (default)
         self.drawing = False
@@ -39,30 +48,22 @@ class Canvas(QWidget):
 
     # Events =======================================
     def mousePressEvent(self, event):
+
         if event.button() == Qt.MouseButton.LeftButton:  # if the pressed button is the left button
             self.drawing = True  # enter drawing mode
-            self.last_point = event.pos()  # save the location of the mouse press as the lastPoint
-            print(self.last_point)  # print the lastPoint for debugging purposes
+            self.current_tool.mouse_press(event)
+            self.update()
 
     def mouseMoveEvent(self, event):
+
         if self.drawing:
-            painter = QPainter(self.image)  # object which allows drawing to take place on an image
 
-            # allows the selection of brush colour, brish size, line type, cap type, join type.
-            painter.setPen(QPen(QColor(self.tool_color), self.tool_size, Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap,
-                                Qt.PenJoinStyle.RoundJoin))
-
-            # draw a line from the point of the original press to the point to where the mouse was dragged to
-            painter.drawLine(self.last_point, event.pos())
-
-            # set the last point to refer to the point we have just moved to, this helps when drawing the next segment
-            self.last_point = event.pos()
+            self.current_tool.mouse_drag(event)
 
             # call the update method of the widget which calls the paintEvent of this class
             self.update()
 
     def mouseReleaseEvent(self, event):
-        # when the mouse is released
 
         if event.button() == Qt.MouseButton.LeftButton:  # if the released button is the left button
             self.drawing = False  # exit drawing mode
