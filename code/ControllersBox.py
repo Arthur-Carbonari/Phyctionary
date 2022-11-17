@@ -1,5 +1,8 @@
 from IPython.external.qt_for_kernel import QtCore
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QWidget, QPushButton, QGridLayout, QGroupBox
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QColor, QIcon, QPixmap
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QWidget, QPushButton, QGridLayout, QGroupBox, QHBoxLayout, \
+    QColorDialog, QSlider, QToolButton
 
 
 class ControllersBox(QFrame):
@@ -11,13 +14,58 @@ class ControllersBox(QFrame):
 
     def __init__(self, game):
         super().__init__()
+
+        self.game = game
+
+        self.current_color = "#000000"
+
         layout = QVBoxLayout(self)
-        color_pallete = self.get_color_pallete()
+        layout.addStretch(1)
 
-        color_pallete.setObjectName("ColorPallete")
-        color_pallete.setStyleSheet("#ColorPallete {border: 1px solid #000;}")
+        self.tool_buttons_grid = QGridLayout()
+        self.populate_tool_buttons_grid()
+        button = QToolButton()
+        button.setIconSize(QtCore.QSize(36, 36))
+        button.setIcon(QIcon("./icons/paint-brush.png"))
 
-        layout.addWidget(color_pallete)
+        layout.addLayout(self.tool_buttons_grid)
+
+        self.color_pallete = QGridLayout()
+        self.populate_color_pallete()
+
+        layout.addLayout(self.color_pallete)
+        layout.addSpacing(10)
+
+        self.current_color_button = QPushButton()
+        self.current_color_button.setFixedSize(QtCore.QSize(36, 36))
+        self.current_color_button.setStyleSheet("background-color: #000;")
+
+        self.more_color_button = QPushButton()
+        self.more_color_button.setFixedSize(QtCore.QSize(36, 36))
+        self.more_color_button.setStyleSheet("background-color: #123;")
+        self.more_color_button.clicked.connect(self.set_color_from_dialog)
+
+        row_wrapper = QHBoxLayout()
+        row_wrapper.addStretch(1)
+        row_wrapper.addWidget(self.current_color_button)
+        row_wrapper.addWidget(self.more_color_button)
+        row_wrapper.addStretch(1)
+        layout.addLayout(row_wrapper)
+
+        layout.addSpacing(20)
+
+        size_slider = QSlider()
+        size_slider.setMinimum(1)
+        size_slider.setMaximum(10)
+        size_slider.setTickPosition(QSlider.TickPosition.TicksBothSides)
+        size_slider.setTickInterval(1)
+
+        slider_wrapper = QHBoxLayout()
+        slider_wrapper.addStretch(1)
+        slider_wrapper.addWidget(size_slider)
+        slider_wrapper.addStretch(1)
+        layout.addLayout(slider_wrapper)
+
         layout.addStretch(1)
         self._init_ui()
 
@@ -25,9 +73,14 @@ class ControllersBox(QFrame):
         self.setObjectName("ControllersBox")
         self.setStyleSheet("""
             #ControllersBox {
-                background-color: #142d4c;
+                background-color: #f5f5f5;
                 border-radius: 8px;
                 border: 1px solid #000;
+            }
+            
+            QToolButton {
+                background: rgba(255, 255, 255, 0);
+                border: none;
             }
         """)
 
@@ -70,11 +123,11 @@ class ControllersBox(QFrame):
                 clm = 1
 
     def populate_color_pallete(self):
-        
+
         col, row = 0, 0
 
         for color in ControllersBox.colors:
-            layout.addWidget(ColorButton(color, self), col, row)
+            self.color_pallete.addWidget(ColorButton(color, self), col, row)
 
             if row != 2:
                 row += 1
