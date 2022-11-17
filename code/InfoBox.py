@@ -1,3 +1,4 @@
+from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QVBoxLayout, QLabel, QPushButton, QFormLayout, QFrame
 
 
@@ -21,7 +22,7 @@ class InfoBox(QFrame):
                 border-radius: 8px;
                 border: 1px solid #000;
             }
-                """)
+        """)
 
         self._init_ui()
 
@@ -31,24 +32,52 @@ class InfoBox(QFrame):
         info_layout = QVBoxLayout()
         self.setLayout(info_layout)
 
-        info_layout.addSpacing(10)
+        info_layout.addStretch(1)
 
         info_layout.addWidget(self.current)
 
-        info_layout.addSpacing(20)
-
-        info_layout.addWidget(self.team_name[1])
-        info_layout.addWidget(self.team_score[1])
-
-        info_layout.addSpacing(20)
-
-        info_layout.addWidget(self.team_name[2])
-        info_layout.addWidget(self.team_score[2])
+        separator = QFrame()
+        separator.setFrameShape(QFrame.Shape.HLine)
+        separator.setLineWidth(2)
 
         info_layout.addStretch(1)
+        info_layout.addWidget(separator)
+        info_layout.addStretch(1)
+
+        info_layout.addWidget(self.team_name[1])
+        info_layout.addSpacing(10)
+        info_layout.addWidget(self.team_score[1])
+
+        separator = QFrame()
+        separator.setFrameShape(QFrame.Shape.HLine)
+        separator.setLineWidth(1)
+
+        info_layout.addStretch(1)
+        info_layout.addWidget(separator)
+        info_layout.addStretch(1)
+
+
+        info_layout.addWidget(self.team_name[2])
+        info_layout.addSpacing(10)
+        info_layout.addWidget(self.team_score[2])
+
+        info_layout.addStretch(5)
         info_layout.addWidget(QPushButton("Skip Turn"))
 
         info_layout.addSpacing(10)
+        
+        # Font size
+
+        font_size = 18
+        font = 'Times'
+
+        self.current.setFont(QFont(font, font_size))
+
+        self.team_name[1].setFont(QFont(font, font_size))
+        self.team_name[2].setFont(QFont(font, font_size))
+
+        self.team_score[1].setFont(QFont(font, font_size))
+        self.team_score[2].setFont(QFont(font, font_size))
 
     def set_team_names(self, team_1: str, team_2: str):
         self.team_name[1].setText("Team 1: " + team_1)

@@ -64,6 +64,8 @@ class ControllersBox(QFrame):
             QToolButton {
                 background: rgba(255, 255, 255, 0);
                 border: none;
+                border-bottom: 1px solid #000;
+                border-left: 1px solid #000;
             }
         """)
 
@@ -72,6 +74,11 @@ class ControllersBox(QFrame):
         main_layout.addStretch(1)
 
         main_layout.addLayout(self.tool_buttons_grid)
+
+        separator = QFrame()
+        separator.setFrameShape(QFrame.Shape.HLine)
+        separator.setLineWidth(1)
+        main_layout.addWidget(separator)
 
         main_layout.addLayout(self.color_pallete)
 
@@ -83,6 +90,11 @@ class ControllersBox(QFrame):
         row_wrapper.addWidget(self.more_color_button)
         row_wrapper.addStretch(1)
         main_layout.addLayout(row_wrapper)
+
+        separator = QFrame()
+        separator.setFrameShape(QFrame.Shape.HLine)
+        separator.setLineWidth(1)
+        main_layout.addWidget(separator)
 
         main_layout.addSpacing(20)
 
