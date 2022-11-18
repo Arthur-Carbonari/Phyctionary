@@ -5,10 +5,9 @@ Student number: 3028568
 
 import csv
 import random
-import sys
 
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget, QHBoxLayout, QVBoxLayout
+from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout
 
 from Canvas import Canvas
 from GuessBox import GuessBox
@@ -77,20 +76,16 @@ class GameWindow(QMainWindow):
         main_layout.setSpacing(40)
 
         # Sets up the left layout and adds to the main layout
-        left_layout = QHBoxLayout()
-        left_layout.setSpacing(0)
-        main_layout.addLayout(left_layout, 2)
+        left_layout = QVBoxLayout()
+        left_layout.setSpacing(20)
+        main_layout.addLayout(left_layout, 4)
 
         # Sets up the right layout and adds to the main layout
-        right_layout = QVBoxLayout()
-        right_layout.setSpacing(20)
-        main_layout.addLayout(right_layout, 4)
+        right_layout = QHBoxLayout()
+        right_layout.setSpacing(5)
+        main_layout.addLayout(right_layout, 2)
 
         # Adds widgets to the left layout
-        left_layout.addWidget(self.info_box, 1)  # Dummy widget
-        left_layout.addWidget(self.controllers_box, 1)  # Dummy widget
-
-        # Adds widgets to the right layout
 
         # ( A wrapper is needed for the canvas because we reimplement the paintEvent for the canvas class )
         canvas_wrapper = QWidget()  # Creates wrapper widget for the canvas...
@@ -104,8 +99,13 @@ class GameWindow(QMainWindow):
         canvas_wrapper_layout.addWidget(self.canvas)  # Adds the canvas to the layout...
         canvas_wrapper_layout.setContentsMargins(3, 3, 3, 3)  # Set the margin for layout...
 
-        right_layout.addWidget(canvas_wrapper, 5)  # Adds the wrapper to the right layout
-        right_layout.addWidget(self.guess_box, 2)  # Adds the guess box to the right layout
+        left_layout.addWidget(canvas_wrapper, 5)  # Adds the wrapper to the right layout
+        left_layout.addWidget(self.guess_box, 2)  # Adds the guess box to the right layout
+
+        # Adds widgets to the right layout
+        right_layout.addWidget(self.controllers_box, 1)
+        right_layout.addWidget(self.info_box, 1)
+
 
     def set_team_names(self, team_1, team_2):
         self.team[1], self.team[2] = team_1, team_2
