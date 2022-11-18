@@ -1,8 +1,8 @@
 from PyQt6.QtCore import Qt, QPoint
-from PyQt6.QtGui import QPainter, QPixmap, QPen, QColor
+from PyQt6.QtGui import QPainter, QPixmap, QColor
 from PyQt6.QtWidgets import QWidget, QFileDialog
 
-from DrawingTool import PaintBrush, PaintSpray, Eraser
+from DrawingTool import PaintBrush, PaintSpray, Eraser, PaintBucket
 
 
 class Canvas(QWidget):
@@ -14,11 +14,13 @@ class Canvas(QWidget):
 
         self.drawing = QPixmap("./icons/canvas.png")  # documentation: https://doc.qt.io/qt-6/qpixmap.html
         self.drawing.fill(Qt.GlobalColor.transparent)  # documentation: https://doc.qt.io/qt-6/qpixmap.html#fill
+        self.drawing.toImage()
 
         self.tool_kit = {
             "brush": PaintBrush(self),
             "eraser": Eraser(self),
-            "spray": PaintSpray(self)
+            "spray": PaintSpray(self),
+            "bucket": PaintBucket(self)
         }
 
         self.undo_stack = []
