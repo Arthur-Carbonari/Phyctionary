@@ -1,5 +1,5 @@
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QVBoxLayout, QLabel, QPushButton, QFormLayout, QFrame
+from PyQt6.QtWidgets import QVBoxLayout, QLabel, QPushButton, QFrame
 
 
 class InfoBox(QFrame):
