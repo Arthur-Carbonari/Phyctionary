@@ -1,7 +1,6 @@
-from IPython.external.qt_for_kernel import QtCore
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QColor, QIcon, QPixmap
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QWidget, QPushButton, QGridLayout, QGroupBox, QHBoxLayout, \
+from PyQt6.QtCore import QSize
+from PyQt6.QtGui import QColor, QIcon
+from PyQt6.QtWidgets import QFrame, QVBoxLayout, QPushButton, QGridLayout, QHBoxLayout, \
     QColorDialog, QSlider, QToolButton
 
 
@@ -27,12 +26,12 @@ class ControllersBox(QFrame):
 
         self.current_color_display = QPushButton()
         self.current_color_display.setDisabled(True)
-        self.current_color_display.setFixedSize(QtCore.QSize(36, 36))
+        self.current_color_display.setFixedSize(QSize(36, 36))
         self.current_color_display.setStyleSheet("background-color: #000;")
 
         self.more_color_button = QPushButton()
         self.more_color_button.setIcon(QIcon("./icons/colour.png"))
-        self.more_color_button.setIconSize(QtCore.QSize(36, 36))
+        self.more_color_button.setIconSize(QSize(36, 36))
         self.more_color_button.setStyleSheet("background-color: rgba(0,0,0,0);")
         self.more_color_button.clicked.connect(self.set_color_from_dialog)
 
@@ -197,7 +196,7 @@ class ToolButton(QToolButton):
 
     def __init__(self, icon_path, slot, parameter=None):
         super().__init__()
-        self.setIconSize(QtCore.QSize(36, 36))
+        self.setIconSize(QSize(36, 36))
         self.setIcon(QIcon(icon_path))
 
         if parameter:
@@ -211,6 +210,6 @@ class ColorButton(QPushButton):
     def __init__(self, color, controller_box):
         super().__init__()
         self.color = color
-        self.setFixedSize(QtCore.QSize(24, 24))
+        self.setFixedSize(QSize(24, 24))
         self.setStyleSheet("background-color: %s;" % color)
         self.clicked.connect(lambda: controller_box.change_current_color(color))
