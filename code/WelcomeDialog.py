@@ -10,11 +10,12 @@ class WelcomeDialog(QDialog):
         self.game_window = game_window
         self.game_ready = False
 
+        # Cause its phyton
         self.setWindowTitle("Phyctionary")
         self.setModal(True)
 
-        self.player_1 = QLineEdit(self)
-        self.player_2 = QLineEdit(self)
+        self.team_1 = QLineEdit(self)
+        self.team_2 = QLineEdit(self)
 
         self.easy = QRadioButton("Easy")
         self.hard = QRadioButton("Hard")
@@ -32,13 +33,13 @@ class WelcomeDialog(QDialog):
         layout.addStretch(1)
 
         layout_one = QFormLayout()
-        layout_one.addRow(QLabel("Player 1: "), self.player_1)
+        layout_one.addRow(QLabel("Team 1: "), self.team_1)
         layout.addLayout(layout_one)
 
         layout.addStretch(1)
 
         layout_two = QFormLayout()
-        layout_two.addRow(QLabel("Player 2: "), self.player_2)
+        layout_two.addRow(QLabel("Team 2: "), self.team_2)
         layout.addLayout(layout_two)
 
         layout.addStretch(1)
@@ -60,8 +61,8 @@ class WelcomeDialog(QDialog):
         self.setLayout(layout)
 
     def start_game(self):
-        p1 = self.player_1.text()
-        p2 = self.player_2.text()
+        p1 = self.team_1.text()
+        p2 = self.team_2.text()
 
         if not (p1 and p2):
             return
