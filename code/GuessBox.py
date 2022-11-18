@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QStyleOption, QStyle, QFrame, QLineEdit, QVBoxLayout, QTextEdit
+from PyQt6.QtWidgets import QFrame, QLineEdit, QVBoxLayout, QTextEdit
 
 
 class GuessBox(QFrame):
@@ -13,6 +13,7 @@ class GuessBox(QFrame):
         self.output_field.setReadOnly(True)
 
         self.input_field = QLineEdit(self)
+        self.input_field.setPlaceholderText("Write your guess here")
 
         self.setStyleSheet("""
                     background-color: #f5f5f5;
